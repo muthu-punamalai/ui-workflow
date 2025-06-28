@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import asyncio
 import json
 import os
@@ -8,9 +10,6 @@ from pathlib import Path
 
 import typer
 from browser_use import Browser
-
-# Assuming OPENAI_API_KEY is set in the environment
-from langchain_openai import ChatOpenAI
 from patchright.async_api import async_playwright as patchright_async_playwright
 
 from workflow_use.builder.service import BuilderService
@@ -18,6 +17,9 @@ from workflow_use.controller.service import WorkflowController
 from workflow_use.mcp.service import get_mcp_server
 from workflow_use.recorder.service import RecordingService  # Added import
 from workflow_use.workflow.service import Workflow
+from workflow_use.llm.providers import create_llm_with_fallback, LLMProviderError
+from workflow_use.config.llm_config import get_default_config
+from workflow_use.hybrid.test_runner import HybridTestRunner
 
 # Placeholder for recorder functionality
 # from src.recorder.service import RecorderService
@@ -29,18 +31,35 @@ app = typer.Typer(
 	no_args_is_help=True,
 )
 
-# Default LLM instance to None
+# Initialize LLM instances using the new provider system
 llm_instance = None
-try:
-	llm_instance = ChatOpenAI(model='gpt-4o')
-	page_extraction_llm = ChatOpenAI(model='gpt-4o-mini')
-except Exception as e:
-	typer.secho(f'Error initializing LLM: {e}. Would you like to set your OPENAI_API_KEY?', fg=typer.colors.RED)
-	set_openai_api_key = input('Set OPENAI_API_KEY? (y/n): ')
-	if set_openai_api_key.lower() == 'y':
-		os.environ['OPENAI_API_KEY'] = input('Enter your OPENAI_API_KEY: ')
-		llm_instance = ChatOpenAI(model='gpt-4o')
-		page_extraction_llm = ChatOpenAI(model='gpt-4o-mini')
+page_extraction_llm = None
+
+def initialize_llm(interactive: bool = False):
+	"""Initialize LLM instances with configuration from environment."""
+	global llm_instance, page_extraction_llm
+
+	try:
+		config = get_default_config()
+		llm_instance, page_extraction_llm = create_llm_with_fallback(config, interactive=interactive)
+
+		if llm_instance:
+			print(f'✅ LLM initialized successfully using {config.provider} provider')
+			return True
+		else:
+			if interactive:
+				print('⚠️  LLM not initialized. Some features may not work.')
+			return False
+
+	except Exception as e:
+		if interactive:
+			print(f'❌ Error during LLM initialization: {e}')
+		llm_instance = None
+		page_extraction_llm = None
+		return False
+
+# Try to initialize LLM silently on import
+initialize_llm(interactive=False)
 
 builder_service = BuilderService(llm=llm_instance) if llm_instance else None
 # recorder_service = RecorderService() # Placeholder
@@ -269,10 +288,15 @@ def run_as_tool_command(
 	"""
 	if not llm_instance:
 		typer.secho(
-			'LLM not initialized. Please check your OpenAI API key. Cannot run as tool.',
-			fg=typer.colors.RED,
+			'LLM not initialized. Attempting to initialize with interactive mode...',
+			fg=typer.colors.YELLOW,
 		)
-		raise typer.Exit(code=1)
+		if not initialize_llm(interactive=True):
+			typer.secho(
+				'LLM initialization failed. Cannot run as tool.',
+				fg=typer.colors.RED,
+			)
+			raise typer.Exit(code=1)
 
 	typer.echo(
 		typer.style(f'Loading workflow from: {typer.style(str(workflow_path.resolve()), fg=typer.colors.MAGENTA)}', bold=True)
@@ -426,16 +450,175 @@ def mcp_server_command(
 	typer.echo(typer.style('Starting MCP server...', bold=True))
 	typer.echo()  # Add space
 
-	llm_instance = ChatOpenAI(model='gpt-4o')
-	page_extraction_llm = ChatOpenAI(model='gpt-4o-mini')
+	# Use global LLM instances or initialize if needed
+	mcp_llm = llm_instance
+	mcp_page_llm = page_extraction_llm
 
-	mcp = get_mcp_server(llm_instance, page_extraction_llm=page_extraction_llm, workflow_dir='./tmp')
+	if not mcp_llm:
+		typer.secho('LLM not initialized. Attempting to initialize...', fg=typer.colors.YELLOW)
+		if not initialize_llm(interactive=True):
+			typer.secho('❌ LLM initialization failed. Cannot start MCP server.', fg=typer.colors.RED)
+			raise typer.Exit(code=1)
+		mcp_llm = llm_instance
+		mcp_page_llm = page_extraction_llm
+
+	config = get_default_config()
+	typer.secho(f'✅ Using {config.provider} provider for MCP server', fg=typer.colors.GREEN)
+
+	mcp = get_mcp_server(mcp_llm, page_extraction_llm=mcp_page_llm, workflow_dir='./tmp')
 
 	mcp.run(
 		transport='sse',
 		host='0.0.0.0',
 		port=port,
 	)
+
+
+@app.command(
+	name='run-test',
+	help='Run a single .txt test file using hybrid workflow-use + browser-use approach.'
+)
+def run_test_command(
+	test_file: Path = typer.Argument(
+		...,
+		exists=True,
+		file_okay=True,
+		dir_okay=False,
+		readable=True,
+		help='Path to the .txt test file.',
+		show_default=False,
+	),
+	force_browser_use: bool = typer.Option(
+		False,
+		'--force-browser-use',
+		'-f',
+		help='Force browser-use execution (skip workflow-use even if workflow.json exists).',
+	),
+):
+	"""
+	Run a single test file using the hybrid approach.
+	First run: txt → Gherkin → browser-use → capture workflow.json
+	Subsequent runs: Use workflow.json with browser-use fallback on failures.
+	"""
+	async def _run_test():
+		# Ensure LLM is initialized
+		if not llm_instance:
+			typer.secho('LLM not initialized. Attempting to initialize...', fg=typer.colors.YELLOW)
+			if not initialize_llm(interactive=False):
+				typer.secho('❌ LLM initialization failed. Cannot run test.', fg=typer.colors.RED)
+				raise typer.Exit(code=1)
+
+		typer.echo(typer.style(f'Running test: {typer.style(str(test_file.resolve()), fg=typer.colors.MAGENTA)}', bold=True))
+		typer.echo()
+
+		try:
+			# Create hybrid test runner
+			runner = HybridTestRunner(
+				llm=llm_instance,
+				page_extraction_llm=page_extraction_llm
+			)
+
+			# Run the test
+			result = await runner.run_test(str(test_file), force_browser_use=force_browser_use)
+
+			# Display results
+			if result.get('success', False):
+				typer.secho('✅ Test PASSED', fg=typer.colors.GREEN, bold=True)
+				typer.echo(f"Execution method: {result.get('execution_method', 'unknown')}")
+
+				if result.get('workflow_captured'):
+					typer.echo(f"Workflow captured: {result.get('workflow_path')}")
+				if result.get('workflow_updated'):
+					typer.echo(f"Workflow updated with {len(result.get('fallback_steps', []))} fallback steps")
+			else:
+				typer.secho('❌ Test FAILED', fg=typer.colors.RED, bold=True)
+				if 'error' in result:
+					typer.echo(f"Error: {result['error']}")
+
+			# Show detailed results
+			typer.echo()
+			typer.echo(typer.style('Detailed Results:', bold=True))
+			typer.echo(json.dumps(result, indent=2, default=str))
+
+		except Exception as e:
+			typer.secho(f'❌ Error running test: {e}', fg=typer.colors.RED)
+			raise typer.Exit(code=1)
+
+	return asyncio.run(_run_test())
+
+
+@app.command(
+	name='run-test-suite',
+	help='Run all .txt test files in a directory using hybrid approach.'
+)
+def run_test_suite_command(
+	test_directory: Path = typer.Argument(
+		...,
+		exists=True,
+		file_okay=False,
+		dir_okay=True,
+		readable=True,
+		help='Path to the directory containing .txt test files.',
+		show_default=False,
+	),
+):
+	"""
+	Run all .txt test files in a directory using the hybrid approach.
+	"""
+	async def _run_test_suite():
+		# Ensure LLM is initialized
+		if not llm_instance:
+			typer.secho('LLM not initialized. Attempting to initialize...', fg=typer.colors.YELLOW)
+			if not initialize_llm(interactive=False):
+				typer.secho('❌ LLM initialization failed. Cannot run test suite.', fg=typer.colors.RED)
+				raise typer.Exit(code=1)
+
+		typer.echo(typer.style(f'Running test suite: {typer.style(str(test_directory.resolve()), fg=typer.colors.MAGENTA)}', bold=True))
+		typer.echo()
+
+		try:
+			# Create hybrid test runner
+			runner = HybridTestRunner(
+				llm=llm_instance,
+				page_extraction_llm=page_extraction_llm
+			)
+
+			# Run the test suite
+			results = await runner.run_test_suite(str(test_directory))
+
+			# Display summary
+			total = results.get('total_tests', 0)
+			passed = results.get('passed_tests', 0)
+			failed = results.get('failed_tests', 0)
+
+			typer.echo(typer.style('Test Suite Results:', bold=True))
+			typer.echo(f"Total tests: {total}")
+			typer.secho(f"Passed: {passed}", fg=typer.colors.GREEN)
+			if failed > 0:
+				typer.secho(f"Failed: {failed}", fg=typer.colors.RED)
+			else:
+				typer.secho(f"Failed: {failed}", fg=typer.colors.GREEN)
+
+			# Overall result
+			if results.get('success', False):
+				typer.secho('\n✅ All tests PASSED', fg=typer.colors.GREEN, bold=True)
+			else:
+				typer.secho('\n❌ Some tests FAILED', fg=typer.colors.RED, bold=True)
+
+			# Show detailed results
+			typer.echo()
+			typer.echo(typer.style('Detailed Results:', bold=True))
+			for test_result in results.get('results', []):
+				test_file = test_result['test_file']
+				success = test_result['result'].get('success', False)
+				status = '✅' if success else '❌'
+				typer.echo(f"{status} {test_file}")
+
+		except Exception as e:
+			typer.secho(f'❌ Error running test suite: {e}', fg=typer.colors.RED)
+			raise typer.Exit(code=1)
+
+	return asyncio.run(_run_test_suite())
 
 
 @app.command('launch-gui', help='Launch the workflow visualizer GUI.')

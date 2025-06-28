@@ -1,0 +1,39 @@
+{
+  "workflow_analysis": "Captured from browser-use execution on 2025-06-28T17:26:12.183463",
+  "name": "test_google_search",
+  "description": "Auto-generated workflow from test_google_search",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": null,
+      "output": null,
+      "timestamp": null,
+      "tabId": null,
+      "type": "navigation",
+      "url": "https://www.google.com"
+    },
+    {
+      "description": null,
+      "output": null,
+      "timestamp": null,
+      "tabId": null,
+      "type": "input",
+      "cssSelector": "textarea.gLFyf[id=\"APjFqb\"][name=\"q\"]",
+      "value": "browser automation",
+      "xpath": "html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div[1]/div[2]/textarea",
+      "elementTag": "textarea"
+    },
+    {
+      "description": null,
+      "output": null,
+      "timestamp": null,
+      "tabId": null,
+      "type": "click",
+      "cssSelector": "textarea.gLFyf[id=\"APjFqb\"][name=\"q\"]",
+      "xpath": "html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div[1]/div[2]/textarea",
+      "elementTag": "textarea",
+      "elementText": "Search"
+    }
+  ],
+  "input_schema": []
+}

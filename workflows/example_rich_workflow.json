@@ -1,0 +1,67 @@
+{
+  "workflow_analysis": "Captured from browser-use execution with enhanced element data",
+  "name": "google_search_enhanced",
+  "description": "Auto-generated workflow with rich element details",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "type": "navigation",
+      "url": "https://www.google.com",
+      "description": "Navigate to Google homepage",
+      "timestamp": "2025-06-28T23:10:37.569535Z"
+    },
+    {
+      "type": "input",
+      "cssSelector": "textarea.gLFyf[id=\"APjFqb\"][name=\"q\"]",
+      "xpath": "html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div[1]/div[2]/textarea",
+      "value": "browser automation",
+      "elementTag": "textarea",
+      "elementAttributes": {
+        "class": "gLFyf",
+        "id": "APjFqb",
+        "name": "q",
+        "aria-label": "Search",
+        "role": "combobox",
+        "autocomplete": "off"
+      },
+      "description": "Enter search term in Google search box"
+    },
+    {
+      "type": "click",
+      "cssSelector": "input.gNO89b[name=\"btnK\"][type=\"submit\"]",
+      "xpath": "html/body/div[1]/div[3]/form/div[1]/div[1]/div[2]/div[4]/div[6]/center/input[1]",
+      "elementTag": "input",
+      "elementText": "Google Search",
+      "elementAttributes": {
+        "class": "gNO89b",
+        "name": "btnK",
+        "type": "submit",
+        "aria-label": "Google Search",
+        "role": "button"
+      },
+      "description": "Click Google Search button"
+    },
+    {
+      "type": "click",
+      "cssSelector": "a.KEVENd[href=\"https://www.browserstack.com/guide/what-is-browser-automation\"]",
+      "xpath": "html/body/div[3]/div/div[12]/div[1]/div[2]/div/div/div[1]/div/div/div/div[1]/div/div/div[1]/div[1]/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div[2]/div/div[2]/div[1]/div/div/div/div/div/ul/li[1]/a",
+      "elementTag": "a",
+      "elementText": "What is Browser Automation: Tutorial to Get Started | BrowserStack",
+      "elementAttributes": {
+        "class": "KEVENd",
+        "href": "https://www.browserstack.com/guide/what-is-browser-automation",
+        "aria-label": "What is Browser Automation: Tutorial to Get Started | BrowserStack"
+      },
+      "description": "Click first search result"
+    }
+  ],
+  "input_schema": [],
+  "metadata": {
+    "capture_method": "browser-use-enhanced",
+    "total_steps": 4,
+    "execution_time": "89.2s",
+    "browser": "chromium",
+    "viewport": "1280x720",
+    "success_rate": "100%"
+  }
+}

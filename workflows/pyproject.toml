@@ -18,6 +18,9 @@ dependencies = [
     "fastmcp>=2.3.4",
     "typer>=0.15.3",
     "uvicorn>=0.34.2",
+    "langchain-aws>=0.1.0",
+    "boto3>=1.34.0",
+    "python-dotenv>=1.0.0",
 ]
 
 

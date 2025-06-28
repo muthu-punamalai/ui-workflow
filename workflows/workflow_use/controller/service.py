@@ -20,7 +20,7 @@ from workflow_use.controller.views import (
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_ACTION_TIMEOUT_MS = 1000
+DEFAULT_ACTION_TIMEOUT_MS = 10000  # Increased to 10 seconds for better reliability
 
 # List of default actions from browser_use.controller.service.Controller to disable
 # todo: come up with a better way to filter out the actions (filter IN the actions would be much nicer in this case)
@@ -130,11 +130,22 @@ class WorkflowController(Controller):
 						include_in_memory=True,
 					)
 
-				# Add a small delay and click to ensure the element is focused
-				await locator.fill(params.value)
-				await asyncio.sleep(0.5)
-				await locator.click(force=True)
-				await asyncio.sleep(0.5)
+				# Ensure element is ready for interaction
+				await locator.wait_for(state='visible', timeout=5000)
+				await locator.scroll_into_view_if_needed()
+
+				# Focus, clear, and fill the element
+				await locator.click()  # Focus first
+				await locator.clear()  # Clear existing content
+				await locator.fill(params.value)  # Fill with new content
+
+				# Verify the input was successful
+				try:
+					actual_value = await locator.input_value()
+					if actual_value != params.value:
+						logger.warning(f"Input verification failed. Expected: {params.value}, Actual: {actual_value}")
+				except:
+					pass  # Some elements might not support input_value()
 
 				msg = f'⌨️  Input "{params.value}" into element with CSS selector: {truncate_selector(selector_used)} (original: {truncate_selector(original_selector)})'
 				logger.info(msg)
