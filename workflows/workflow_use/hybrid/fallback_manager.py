@@ -1,5 +1,5 @@
 """
-Fallback manager for handling workflow-use failures and browser-use recovery
+Fallback manager for handling workflow execution failures and browser-use recovery
 """
 
 import logging
@@ -51,16 +51,16 @@ class FallbackManager:
             Tuple of (success, result, updated_step)
         """
         try:
-            # First attempt: Use workflow-use
-            logger.info(f"Attempting workflow-use execution for step {step_index}")
-            
+            # First attempt: Use workflow execution
+            logger.info(f"Attempting workflow execution for step {step_index}")
+
             try:
                 result = await workflow.run_step(step_index)
-                logger.info(f"Workflow-use step {step_index} succeeded")
+                logger.info(f"Workflow execution step {step_index} succeeded")
                 return True, result, None
-                
+
             except Exception as workflow_error:
-                logger.warning(f"Workflow-use step {step_index} failed: {workflow_error}")
+                logger.warning(f"Workflow execution step {step_index} failed: {workflow_error}")
                 
                 # Fallback: Use browser-use
                 return await self._fallback_to_browser_use(
@@ -91,7 +91,15 @@ class FallbackManager:
             
             # Create browser-use task for this specific step
             browser_task = generate_browser_task(step_gherkin, "stop_on_assertion")
-            
+
+            # Track tokens before browser-use fallback
+            try:
+                from workflow_use.hybrid.token_tracker import get_token_tracker
+                token_tracker = get_token_tracker()
+                initial_tokens = token_tracker.get_total_tokens()
+            except Exception:
+                initial_tokens = 0
+
             # Execute with browser-use agent
             browser_agent = BrowserAgent(
                 task=browser_task,
@@ -99,9 +107,31 @@ class FallbackManager:
                 browser_session=self.browser or workflow.browser,
                 use_vision=True
             )
-            
+
             # Run the agent
             agent_history = await browser_agent.run(max_steps=5)
+
+            # Track browser-use fallback tokens using real extraction
+            try:
+                final_tokens = token_tracker.get_total_tokens()
+                if final_tokens == initial_tokens:
+                    # Extract real tokens from browser-use agent (Option C)
+                    real_tokens = self._extract_real_tokens_from_browser_agent(browser_agent, agent_history)
+                    if real_tokens > 0:
+                        model_name = getattr(self.llm, 'model_name', 'browser-use-fallback')
+                        # Estimate input/output split for fallback
+                        estimated_input = int(real_tokens * 0.75)
+                        estimated_output = int(real_tokens * 0.25)
+                        token_tracker.track_llm_call(model_name, estimated_input, estimated_output)
+                        logger.info(f"Tracked browser-use fallback: {real_tokens} tokens for step {step_index}")
+                    else:
+                        # Fallback to estimation if real extraction fails
+                        estimated_tokens = len(browser_task.split()) * 8  # Higher estimate for fallback
+                        model_name = getattr(self.llm, 'model_name', 'browser-use-fallback')
+                        token_tracker.track_llm_call(model_name, int(estimated_tokens * 0.7), int(estimated_tokens * 0.3))
+                        logger.info(f"Tracked browser-use fallback (estimated): {estimated_tokens} tokens for step {step_index}")
+            except Exception as e:
+                logger.error(f"Error in browser-use fallback: {e}")
             
             if agent_history and len(agent_history) > 0:
                 # Check if execution was successful
@@ -125,7 +155,34 @@ class FallbackManager:
         except Exception as e:
             logger.error(f"Error in browser-use fallback: {e}")
             return False, None, None
-    
+
+    def _extract_real_tokens_from_browser_agent(self, browser_agent, agent_history) -> int:
+        """Extract real token usage from browser-use agent using Option C approach"""
+        try:
+            # Import the shared helper function
+            from workflow_use.hybrid.test_runner import _extract_real_tokens_from_browser_use_agent
+
+            # Try to extract from browser agent first
+            total_tokens = _extract_real_tokens_from_browser_use_agent(browser_agent)
+
+            if total_tokens > 0:
+                logger.debug(f"Extracted real tokens from browser agent: {total_tokens}")
+                return total_tokens
+
+            # Fallback to agent history
+            total_tokens = _extract_real_tokens_from_browser_use_agent(agent_history)
+
+            if total_tokens > 0:
+                logger.debug(f"Extracted real tokens from agent history: {total_tokens}")
+                return total_tokens
+
+            logger.debug("No real token data found in browser agent or history")
+            return 0
+
+        except Exception as e:
+            logger.debug(f"Error extracting real tokens from browser agent: {e}")
+            return 0
+
     def _extract_step_from_gherkin(self, gherkin_scenario: str, step_index: int) -> Optional[str]:
         """Extract a specific step from Gherkin scenario"""
         try:

@@ -1,26 +1,9 @@
-Feature: GP Direct Employee Onboarding Spain
+# Pay supplements Tests
+Feature: Pay supplements
 
-Scenario: Onboard GP direct employee using single onboarding
+Scenario: Edit pay supplement under processing
     Go to https://release-app.usemultiplier.com
     login with email:tester+bullertest@usemultiplier.com password:Password@123
-    Click on 'Hire & onboard' option from the left nav bar
-    Wait until 'Direct employee' tile is visible under 'Who would you like to onboard?' and click 'Direct employee' tile
-    Click 'Entity' dropdown, type 'bullet-gp-spain' in the search field. Select 'bullet-gp-spain' option from the dropdown values
-    Verify 'Multiple in one-go' and 'Individually' tile are visible
-    Click on 'Individually' tile
-    Enter <random first name> in 'First and Middle Name(s)' field, <random last name> in 'Last Name' field
-    Click on Gender dropdown and select 'Female' from the list of values
-    Enter 'tester+<random_number>@usemultiplier.com' in 'Personal Email Address' field
-    Enter <random 5 digit number> in 'Employee ID' field
-    Enter '1234 Elm Street' in 'Address' field
-    Scroll down until 'Job Title' field is visible
-    Enter 'Madrid' in the 'City' field, '12345' in the 'Postal Code/Zip Code' field, 'A12345' in the 'Documento Nacional de Identidad (DNI)' field,'99988999' in 'Phone Number' field
-    Click 'Nationality' dropdown, type 'ESP' in the search field. Select Spain from the dropdown values
-    Enter 'Software engineer' in 'Job Title' field
-    Scroll down to bottom of the page
-    Click 'Department' dropdown. Select 'Engineering' from the dropdown values
-    Click on the Employment Start Date field to open the calendar
-    Click on the date '1' from the visible calendar (current month)
-    Scroll down until Continue button is visible
-    Verify that Continue button is enabled
+    Click on Administration button from the left nav bar
+    Verify the Pay supplements option is visible under Adminstration
     Close the browser

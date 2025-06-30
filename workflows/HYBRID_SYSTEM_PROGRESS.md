@@ -1,7 +1,7 @@
 # UI-Workflow Hybrid System Progress Report
 
 ## 🎯 Project Overview
-**Goal**: Replace smart-test framework with intelligent hybrid system that combines workflow-use and browser-use
+**Goal**: Replace smart-test framework with intelligent hybrid system that combines workflow execution and browser-use
 **Status**: 95% Complete - Core functionality working, minor enhancements pending
 
 ## ✅ COMPLETED FEATURES
@@ -29,7 +29,7 @@
 - **Flow**: 
   ```
   First Run: txt → Gherkin → browser-use → capture workflow.json
-  Subsequent: workflow.json → workflow-use → browser-use fallback
+  Subsequent: workflow.json → workflow execution → browser-use fallback
   ```
 - **CLI Commands**:
   - `uv run python cli.py run-test testcases/file.txt`
@@ -81,14 +81,14 @@ All 6 Gherkin steps completed successfully
 **Solution**: Enhanced capture system built in `simple_capture.py`
 **Needs**: Testing to verify XPath/CSS selector capture
 
-### 2. Workflow-Use Execution (Not Started)
+### 2. Workflow Execution (Not Started)
 **Missing**: `run_single_step()` method in Workflow class
 **Current**: Falls back to browser-use (which works)
 **Needed**: Step-by-step workflow execution for optimization
 
-### 3. Step-Level Fallback Testing (Pending workflow-use)
+### 3. Step-Level Fallback Testing (Pending workflow execution)
 **Architecture**: Complete but untested
-**Depends**: Workflow-use execution implementation
+**Depends**: Workflow execution implementation
 
 ## 📁 FILE STRUCTURE
 
@@ -143,7 +143,7 @@ testcases/
 - [x] Capture workflow.json (using existing ui-workflow schema)
 - [x] AWS Bedrock integration (automatic configuration)
 - [x] CI/CD compatibility (non-interactive execution)
-- [ ] Workflow-use optimization (pending implementation)
-- [ ] Step-level fallback (pending workflow-use)
+- [ ] Workflow execution optimization (pending implementation)
+- [ ] Step-level fallback (pending workflow execution)
 
 **The hybrid system is production-ready for smart-test replacement!** 🎉

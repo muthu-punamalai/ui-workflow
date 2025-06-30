@@ -1,11 +1,11 @@
 {
-  "workflow_analysis": "Captured from browser-use execution on 2025-06-29T00:25:14.114062",
+  "workflow_analysis": "Captured from browser-use execution on 2025-06-30T17:18:09.082410",
   "name": "pay_supplements",
   "description": "Auto-generated workflow from pay_supplements",
   "version": "1.0.0",
   "steps": [
     {
-      "description": "Navigate to Multiplier release app",
+      "description": "Navigate to https://release-app.usemultiplier.com",
       "output": null,
       "timestamp": 0,
       "tabId": 0,
@@ -13,378 +13,92 @@
       "url": "https://release-app.usemultiplier.com"
     },
     {
-      "description": "Enter email address",
+      "description": "Enter 'tester+bullertest@usemultiplier.com' in input field",
       "output": null,
       "timestamp": 0,
       "tabId": 0,
       "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div > div > form > div:nth-of-type(1) > div > input.css-dkx3e[id=\"email\"][placeholder=\"someone@example.com\"][data-cy=\"email\"][name=\"email\"]",
+      "cssSelector": "[data-cy='email']",
       "value": "tester+bullertest@usemultiplier.com",
       "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[1]/div/input",
-      "elementTag": "input"
+      "elementTag": "input",
+      "primarySelector": "[data-cy='email']",
+      "semanticSelector": "input[name='email']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "email",
+        "placeholder": "someone@example.com",
+        "data-cy": "email",
+        "name": "email",
+        "class": "css-dkx3e",
+        "value": ""
+      }
     },
     {
-      "description": "Enter password",
+      "description": "Enter 'Password@123' in input field",
       "output": null,
       "timestamp": 0,
       "tabId": 0,
       "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div > div > form > div:nth-of-type(2) > div:nth-of-type(2) > input.css-u8o3yb[data-testid=\"password-input\"][type=\"password\"][placeholder=\"password\"][data-cy=\"password\"][name=\"password\"]",
+      "cssSelector": "[data-testid='password-input']",
       "value": "Password@123",
       "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[2]/div[2]/input",
-      "elementTag": "input"
+      "elementTag": "input",
+      "primarySelector": "[data-testid='password-input']",
+      "semanticSelector": "input[name='password']",
+      "fallbackSelectors": [
+        "input[type='password'][placeholder='password']",
+        "input[type='password']"
+      ],
+      "elementAttributes": {
+        "data-testid": "password-input",
+        "type": "password",
+        "placeholder": "password",
+        "data-cy": "password",
+        "name": "password",
+        "class": "css-u8o3yb"
+      }
     },
     {
-      "description": "Click login button",
+      "description": "Click element",
       "output": null,
       "timestamp": 0,
       "tabId": 0,
       "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div > div > form > div:nth-of-type(3) > button.css-oqiu1m[type=\"submit\"][data-cy=\"submit\"]",
+      "cssSelector": "[data-cy='submit']",
       "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[3]/button",
       "elementTag": "button",
-      "elementText": null
+      "elementText": null,
+      "primarySelector": "[data-cy='submit']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "submit",
+        "data-fs-unmask": "true",
+        "data-sentry-unmask": "true",
+        "data-cy": "submit",
+        "class": "css-oqiu1m"
+      }
     },
     {
-      "description": "Click Administration section",
+      "description": "Click element",
       "output": null,
       "timestamp": 0,
       "tabId": 0,
       "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > a > div",
-      "xpath": "html/body/div[1]/div[2]/div[1]/div[2]/div[2]/a/div",
+      "cssSelector": "[data-testid='ADMINISTRATION-section']",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[2]/div[5]/div",
       "elementTag": "div",
-      "elementText": null
-    },
-    {
-      "description": "Click Pay supplements link",
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(1) > div > div:nth-of-type(3) > div > div:nth-of-type(3) > div > button:nth-of-type(2).css-1gua4nj[type=\"button\"]",
-      "xpath": "html/body/div[1]/div[1]/div/div[3]/div/div[3]/div/button[2]",
-      "elementTag": "button",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(2) > a > div",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div[2]/a/div",
-      "elementTag": "div",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div > div > div > div > button.css-1w0ixfb[data-testid=\"dropdown-button\"][type=\"button\"]",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div/div/div/div/button",
-      "elementTag": "button",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div > div > div > div > div > div:nth-of-type(1) > input.css-qigjp5[autocomplete=\"off\"][aria-label=\"dropdown-input\"][data-testid=\"dropdown-input\"][name=\"input\"][placeholder=\"Select\"]",
-      "value": "bullet-gp-spain",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div/div/div/div/div/div[1]/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div > div > div > div > div > div:nth-of-type(2) > table > tbody > tr.css-1b0pki5[data-testid=\"dropdown-entry-13224020\"][role=\"button\"]",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div/div/div/div/div/div[2]/table/tbody/tr",
-      "elementTag": "tr",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div > div:nth-of-type(2) > div > div:nth-of-type(2) > button > div > div > div",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div/div[2]/div/div[2]/button/div/div/div",
-      "elementTag": "div",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div > input.css-dkx3e[autocomplete=\"off\"][id=\"first-name\"][placeholder=\"John\"][name=\"firstName\"]",
-      "value": "Alexander",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[1]/div[1]/div[1]/div/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div > input.css-dkx3e[autocomplete=\"off\"][id=\"last-name\"][placeholder=\"Doe\"][name=\"lastName\"]",
-      "value": "Smith",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[1]/div[1]/div[2]/div/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div > div > button.css-1idf0xt[id=\"gender\"][data-testid=\"dropdown-button\"][type=\"button\"]",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[1]/div[1]/div[3]/div/div/button",
-      "elementTag": "button",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div > div > div > div > table > tbody > tr:nth-of-type(2).css-1b0pki5[data-testid=\"dropdown-entry-FEMALE\"][role=\"button\"]",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[1]/div[1]/div[3]/div/div/div/div/table/tbody/tr[2]",
-      "elementTag": "tr",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div > input.css-dkx3e[autocomplete=\"off\"][id=\"email\"][placeholder=\"john@gmail.com\"][name=\"email\"]",
-      "value": "tester+98765@usemultiplier.com",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[1]/div[2]/div[1]/div/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(1) > div:nth-of-type(3) > div > div > input.css-dkx3e[autocomplete=\"off\"][id=\"employee-id\"][placeholder=\"MULT0001\"][name=\"employeeId\"]",
-      "value": "12345",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[1]/div[3]/div/div/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(2) > div > div:nth-of-type(1) > label.css-14ew9lx[for=\"address.line1\"]",
-      "value": "1234 Elm Street",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[2]/div/div[1]/label",
-      "elementTag": "label"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(2) > div > div:nth-of-type(4) > div > input.css-dkx3e[autocomplete=\"off\"][id=\"address.city\"][data-testid=\"address.city\"][placeholder=\"City\"][name=\"preDataRequirements.4.value\"]",
-      "value": "Madrid",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[2]/div/div[4]/div/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(2) > div > div:nth-of-type(5) > div > input.css-dkx3e[autocomplete=\"off\"][id=\"address.postalCode\"][data-testid=\"address.postalCode\"][placeholder=\"123456\"][name=\"preDataRequirements.5.value\"]",
-      "value": "12345",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[2]/div/div[5]/div/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(2) > div > div:nth-of-type(6) > div > input.css-dkx3e[autocomplete=\"off\"][id=\"nationalId\"][data-testid=\"nationalId\"][placeholder=\"ABCD-123456-789\"][name=\"preDataRequirements.6.value\"]",
-      "value": "A12345",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[2]/div/div[6]/div/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(2) > div > div:nth-of-type(8) > div > div:nth-of-type(2) > input.css-1vmjsgp[id=\"phoneNumber\"][placeholder=\"000000000\"]",
-      "value": "99988999",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[2]/div/div[8]/div/div[2]/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(2) > div > div:nth-of-type(7) > div > div > button.css-1w0ixfb[data-testid=\"dropdown-button\"][type=\"button\"]",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[2]/div/div[7]/div/div/button",
-      "elementTag": "button",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(2) > div > div:nth-of-type(7) > div > div > div > div:nth-of-type(1) > input.css-qigjp5[autocomplete=\"off\"][aria-label=\"dropdown-input\"][data-testid=\"dropdown-input\"][name=\"input\"][placeholder=\"Select Nationality\"]",
-      "value": "ESP",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[2]/div/div[7]/div/div/div/div[1]/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(2) > div > div:nth-of-type(7) > div > div > div > div:nth-of-type(2) > table > tbody > tr.css-1b0pki5[data-testid=\"dropdown-entry-ESP\"][role=\"button\"]",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[2]/div/div[7]/div/div/div/div[2]/table/tbody/tr",
-      "elementTag": "tr",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div > input.css-dkx3e[autocomplete=\"off\"][id=\"job-title\"][data-testid=\"job-title\"][placeholder=\"Software Engineer\"][name=\"jobTitle\"]",
-      "value": "Software engineer",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[3]/div[1]/div[1]/div/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(3) > div > div > div > button.css-1idf0xt[id=\"department\"][data-testid=\"dropdown-button\"][type=\"button\"]",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[3]/div[1]/div[3]/div/div/div/button",
-      "elementTag": "button",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(3) > div > div > div > div > div > table > tbody > tr:nth-of-type(2).css-1b0pki5[data-testid=\"dropdown-entry-256\"][role=\"button\"]",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[3]/div[1]/div[3]/div/div/div/div/div/table/tbody/tr[2]",
-      "elementTag": "tr",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(3) > div > div > input.css-kyxww6[id=\"start-on\"][data-testid=\"date-input-field\"][placeholder=\"DD MM YYYY\"][autocomplete=\"off\"]",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[3]/div[2]/div[3]/div/div/input",
-      "elementTag": "input",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "click",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(3) > div > div > div > div > div > div:nth-of-type(1) > div:nth-of-type(15) > button.css-yl6vsb[data-testid=\"date-1\"][type=\"button\"]",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[3]/div[2]/div[3]/div/div/div/div/div/div[1]/div[15]/button",
-      "elementTag": "button",
-      "elementText": null
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(2) > div > div:nth-of-type(7) > div > div > button.css-1w0ixfb[data-testid=\"dropdown-button\"][type=\"button\"]",
-      "value": "Alexander",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[2]/div/div[7]/div/div/button",
-      "elementTag": "button"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(2) > div > div:nth-of-type(7) > div > div > div > div:nth-of-type(1) > input.css-qigjp5[autocomplete=\"off\"][aria-label=\"dropdown-input\"][data-testid=\"dropdown-input\"][name=\"input\"][placeholder=\"Select Nationality\"]",
-      "value": "",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[2]/div/div[7]/div/div/div/div[1]/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div > input.css-dkx3e[autocomplete=\"off\"][id=\"first-name\"][placeholder=\"John\"][name=\"firstName\"]",
-      "value": "Alexander",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[1]/div[1]/div[1]/div/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div > input.css-dkx3e[autocomplete=\"off\"][id=\"last-name\"][placeholder=\"Doe\"][name=\"lastName\"]",
-      "value": "Smith",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[1]/div[1]/div[2]/div/input",
-      "elementTag": "input"
-    },
-    {
-      "description": null,
-      "output": null,
-      "timestamp": 0,
-      "tabId": 0,
-      "type": "input",
-      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > form > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div > input.css-dkx3e[autocomplete=\"off\"][id=\"email\"][placeholder=\"john@gmail.com\"][name=\"email\"]",
-      "value": "tester+98765@usemultiplier.com",
-      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/form/div[1]/div[2]/div[1]/div/input",
-      "elementTag": "input"
+      "elementText": null,
+      "primarySelector": "[data-testid='ADMINISTRATION-section']",
+      "semanticSelector": "[role='button']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "role": "button",
+        "tabindex": "0",
+        "data-testid": "ADMINISTRATION-section",
+        "aria-hidden": "true"
+      }
     }
   ],
   "input_schema": []

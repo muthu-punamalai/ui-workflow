@@ -1,6 +1,6 @@
 {
-  "name": "browser-use-workflow-recorder",
-  "description": "record and enchance workflows for browser use",
+  "name": "ui-workflow-recorder",
+  "description": "record and enhance workflows for hybrid testing framework",
   "private": true,
   "version": "0.0.0",
   "type": "module",

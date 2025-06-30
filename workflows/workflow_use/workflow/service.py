@@ -36,7 +36,7 @@ from workflow_use.workflow.views import WorkflowRunOutput
 
 logger = logging.getLogger(__name__)
 
-WAIT_FOR_ELEMENT_TIMEOUT = 2500
+WAIT_FOR_ELEMENT_TIMEOUT = 5000  # Increased to 5000ms for better reliability after page transitions
 
 T = TypeVar('T', bound=BaseModel)
 

@@ -76,7 +76,7 @@ class SimpleWorkflowCapture:
     ) -> Optional[WorkflowDefinitionSchema]:
         """
         Create a basic workflow from Gherkin scenario
-        This creates a simple workflow that can be used by workflow-use
+        This creates a simple workflow that can be used by workflow execution
         """
         try:
             if not success:
@@ -377,6 +377,9 @@ class SimpleWorkflowCapture:
                 # Extract detailed element information
                 css_selector = self._get_element_selector(interacted_element)
                 text_value = action_data.get('text', '')
+                # Generate multi-strategy selectors
+                selectors = self._generate_multi_strategy_selectors(interacted_element)
+
                 return InputStep(
                     type="input",
                     cssSelector=css_selector,
@@ -385,13 +388,20 @@ class SimpleWorkflowCapture:
                     elementTag=self._get_element_tag(interacted_element),
                     description=f"Enter '{text_value}' in input field",
                     timestamp=0,
-                    tabId=0
+                    tabId=0,
+                    primarySelector=selectors.get('primary'),
+                    semanticSelector=selectors.get('semantic'),
+                    fallbackSelectors=selectors.get('fallbacks'),
+                    elementAttributes=selectors.get('attributes')
                 )
 
             elif action_name == 'click_element_by_index':
                 # Extract detailed element information
                 css_selector = self._get_element_selector(interacted_element)
                 element_text = self._get_element_text(interacted_element)
+                # Generate multi-strategy selectors
+                selectors = self._generate_multi_strategy_selectors(interacted_element)
+
                 return ClickStep(
                     type="click",
                     cssSelector=css_selector,
@@ -400,7 +410,11 @@ class SimpleWorkflowCapture:
                     elementText=element_text,
                     description=f"Click {element_text if element_text else 'element'}",
                     timestamp=0,
-                    tabId=0
+                    tabId=0,
+                    primarySelector=selectors.get('primary'),
+                    semanticSelector=selectors.get('semantic'),
+                    fallbackSelectors=selectors.get('fallbacks'),
+                    elementAttributes=selectors.get('attributes')
                 )
 
             # Skip 'extract_content', 'done' as they're not workflow actions
@@ -411,17 +425,60 @@ class SimpleWorkflowCapture:
         return None
 
     def _get_element_selector(self, element) -> str:
-        """Get CSS selector from element"""
+        """Get the best possible CSS selector from element with stability priority"""
         if not element:
             return ""
 
-        if hasattr(element, 'css_selector') and element.css_selector:
-            return element.css_selector
-        elif hasattr(element, 'id') and element.id:
+        # Get attributes for analysis
+        attrs = getattr(element, 'attributes', {}) or {}
+        tag = getattr(element, 'tag_name', 'div')
+
+        # Priority 1: Test IDs (most stable)
+        if attrs.get('data-testid'):
+            return f"[data-testid='{attrs['data-testid']}']"
+        if attrs.get('data-cy'):
+            return f"[data-cy='{attrs['data-cy']}']"
+
+        # Priority 2: Semantic attributes
+        if hasattr(element, 'id') and element.id:
             return f"#{element.id}"
-        elif hasattr(element, 'name') and element.name:
-            return f"[name='{element.name}']"
-        elif hasattr(element, 'tag_name'):
+        if attrs.get('id'):
+            return f"#{attrs['id']}"
+        if hasattr(element, 'name') and element.name:
+            return f"{tag}[name='{element.name}']"
+        if attrs.get('name'):
+            return f"{tag}[name='{attrs['name']}']"
+
+        # Priority 3: Type + stable attributes for form elements
+        if tag == 'input' and attrs.get('type'):
+            type_attr = attrs['type']
+            if attrs.get('placeholder'):
+                return f"input[type='{type_attr}'][placeholder='{attrs['placeholder']}']"
+            return f"input[type='{type_attr}']"
+
+        # Priority 4: Role-based selectors
+        if attrs.get('role'):
+            return f"[role='{attrs['role']}']"
+
+        # Priority 5: Aria labels
+        if attrs.get('aria-label'):
+            return f"[aria-label='{attrs['aria-label']}']"
+
+        # Priority 6: Stable classes (avoid generated ones like css-xxxxx)
+        if attrs.get('class'):
+            classes = attrs['class'].split()
+            stable_classes = [cls for cls in classes if not cls.startswith('css-') and len(cls) > 3]
+            if stable_classes:
+                return f"{tag}.{'.'.join(stable_classes[:2])}"
+
+        # Priority 7: Use existing complex selector but log warning
+        if hasattr(element, 'css_selector') and element.css_selector:
+            complex_selector = element.css_selector
+            logger.warning(f"Using complex selector as fallback: {complex_selector[:50]}...")
+            return complex_selector
+
+        # Final fallback: tag name
+        if hasattr(element, 'tag_name'):
             return element.tag_name
 
         return ""
@@ -444,6 +501,64 @@ class SimpleWorkflowCapture:
             attrs = element.attributes or {}
             return attrs.get('aria-label') or attrs.get('value') or attrs.get('title')
         return None
+
+    def _generate_multi_strategy_selectors(self, element) -> Dict[str, Any]:
+        """Generate multiple selector strategies for an element"""
+        if not element:
+            return {}
+
+        attrs = getattr(element, 'attributes', {}) or {}
+        tag = getattr(element, 'tag_name', 'div')
+
+        selectors = {
+            'primary': None,
+            'semantic': None,
+            'fallbacks': [],
+            'attributes': attrs
+        }
+
+        # Primary selector (most stable)
+        if attrs.get('data-testid'):
+            selectors['primary'] = f"[data-testid='{attrs['data-testid']}']"
+        elif attrs.get('data-cy'):
+            selectors['primary'] = f"[data-cy='{attrs['data-cy']}']"
+        elif attrs.get('id'):
+            selectors['primary'] = f"#{attrs['id']}"
+
+        # Semantic selector
+        if attrs.get('name'):
+            selectors['semantic'] = f"{tag}[name='{attrs['name']}']"
+        elif tag == 'input' and attrs.get('type'):
+            selectors['semantic'] = f"input[type='{attrs['type']}']"
+        elif attrs.get('role'):
+            selectors['semantic'] = f"[role='{attrs['role']}']"
+
+        # Fallback selectors
+        fallbacks = []
+
+        # Add type-based selectors for inputs
+        if tag == 'input' and attrs.get('type'):
+            if attrs.get('placeholder'):
+                fallbacks.append(f"input[type='{attrs['type']}'][placeholder='{attrs['placeholder']}']")
+            fallbacks.append(f"input[type='{attrs['type']}']")
+
+        # Add aria-label selectors
+        if attrs.get('aria-label'):
+            fallbacks.append(f"[aria-label='{attrs['aria-label']}']")
+
+        # Add stable class selectors (avoid css-xxxxx)
+        if attrs.get('class'):
+            classes = attrs['class'].split()
+            stable_classes = [cls for cls in classes if not cls.startswith('css-') and len(cls) > 3]
+            if stable_classes:
+                fallbacks.append(f"{tag}.{'.'.join(stable_classes[:2])}")
+
+        # Add text-based selectors for clickable elements
+        if tag in ['button', 'a'] and attrs.get('aria-label'):
+            fallbacks.append(f"{tag}:has-text('{attrs['aria-label']}')")
+
+        selectors['fallbacks'] = fallbacks
+        return selectors
 
     def _extract_url_from_line(self, line: str) -> Optional[str]:
         """Extract URL from Gherkin line"""

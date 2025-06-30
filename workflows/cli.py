@@ -476,7 +476,7 @@ def mcp_server_command(
 
 @app.command(
 	name='run-test',
-	help='Run a single .txt test file using hybrid workflow-use + browser-use approach.'
+	help='Run a single .txt test file or .workflow.json file using hybrid workflow-use + browser-use approach.'
 )
 def run_test_command(
 	test_file: Path = typer.Argument(
@@ -485,7 +485,7 @@ def run_test_command(
 		file_okay=True,
 		dir_okay=False,
 		readable=True,
-		help='Path to the .txt test file.',
+		help='Path to the .txt test file or .workflow.json file.',
 		show_default=False,
 	),
 	force_browser_use: bool = typer.Option(
@@ -534,6 +534,27 @@ def run_test_command(
 				typer.secho('❌ Test FAILED', fg=typer.colors.RED, bold=True)
 				if 'error' in result:
 					typer.echo(f"Error: {result['error']}")
+
+			# Show token usage if available
+			if 'token_usage' in result and result['token_usage'].get('tracking_enabled'):
+				token_info = result['token_usage']
+				typer.echo()
+				typer.echo(typer.style('💰 Token Usage:', bold=True, fg=typer.colors.BLUE))
+				typer.echo(f"Total Cost: ${token_info.get('total_cost_usd', 0):.4f}")
+				typer.echo(f"Total Tokens: {token_info.get('summary', {}).get('total_tokens', 0):,}")
+				typer.echo(f"Input Tokens: {token_info.get('summary', {}).get('total_input_tokens', 0):,}")
+				typer.echo(f"Output Tokens: {token_info.get('summary', {}).get('total_output_tokens', 0):,}")
+
+				# Show per-model breakdown
+				if token_info.get('model_breakdown'):
+					typer.echo()
+					typer.echo(typer.style('📋 Model Breakdown:', bold=True))
+					for model, usage in token_info['model_breakdown'].items():
+						typer.echo(f"  {model}:")
+						typer.echo(f"    Tokens: {usage.get('total_tokens', 0):,}")
+						typer.echo(f"    Cost: ${usage.get('cost', 0):.4f}")
+			elif 'token_usage' in result:
+				typer.echo(f"💰 Token Usage: {result['token_usage'].get('message', 'Not available')}")
 
 			# Show detailed results
 			typer.echo()

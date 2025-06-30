@@ -1,4 +1,4 @@
-from typing import List, Literal, Optional, Union
+from typing import Dict, List, Literal, Optional, Union
 
 from pydantic import BaseModel, Field
 
@@ -44,20 +44,32 @@ class ClickStep(TimestampedWorkflowStep):
 	"""Clicks an element using 'click' (maps to workflow controller's click)."""
 
 	type: Literal['click']  # As seen in examples
-	cssSelector: str = Field(..., description='CSS selector for the target element.')
+	cssSelector: str = Field(..., description='Primary CSS selector for the target element.')
 	xpath: Optional[str] = Field(None, description='XPath selector (often informational).')
 	elementTag: Optional[str] = Field(None, description='HTML tag (informational).')
 	elementText: Optional[str] = Field(None, description='Element text (informational).')
+
+	# Multi-strategy selector support
+	primarySelector: Optional[str] = Field(None, description='Most stable selector (data-testid, id)')
+	semanticSelector: Optional[str] = Field(None, description='Semantic selector (name, type)')
+	fallbackSelectors: Optional[List[str]] = Field(None, description='Additional fallback selectors')
+	elementAttributes: Optional[Dict[str, str]] = Field(None, description='Element attributes for fallback generation')
 
 
 class InputStep(TimestampedWorkflowStep):
 	"""Inputs text using 'input' (maps to workflow controller's input)."""
 
 	type: Literal['input']  # As seen in examples
-	cssSelector: str = Field(..., description='CSS selector for the target input element.')
+	cssSelector: str = Field(..., description='Primary CSS selector for the target input element.')
 	value: str = Field(..., description='Value to input. Can use {context_var}.')
 	xpath: Optional[str] = Field(None, description='XPath selector (informational).')
 	elementTag: Optional[str] = Field(None, description='HTML tag (informational).')
+
+	# Multi-strategy selector support
+	primarySelector: Optional[str] = Field(None, description='Most stable selector (data-testid, id)')
+	semanticSelector: Optional[str] = Field(None, description='Semantic selector (name, type)')
+	fallbackSelectors: Optional[List[str]] = Field(None, description='Additional fallback selectors')
+	elementAttributes: Optional[Dict[str, str]] = Field(None, description='Element attributes for fallback generation')
 
 
 class SelectChangeStep(TimestampedWorkflowStep):

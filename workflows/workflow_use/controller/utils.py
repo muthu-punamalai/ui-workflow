@@ -10,24 +10,55 @@ def truncate_selector(selector: str, max_length: int = 35) -> str:
 
 
 async def get_best_element_handle(page, selector, params=None, timeout_ms=500):
-	"""Find element using stability-ranked selector strategies."""
+	"""Find element using multi-strategy approach with stability ranking."""
 	original_selector = selector
 
-	# Generate stability-ranked fallback selectors
-	fallbacks = generate_stable_selectors(selector, params)
+	# Build comprehensive selector list
+	selectors_to_try = []
 
-	# Try all selectors with exponential backoff for timeouts
-	selectors_to_try = [original_selector] + fallbacks
+	# Priority 1: Multi-strategy selectors from params
+	if params and hasattr(params, 'primarySelector') and params.primarySelector:
+		selectors_to_try.append(params.primarySelector)
 
-	for try_selector in selectors_to_try:
+	if params and hasattr(params, 'semanticSelector') and params.semanticSelector:
+		selectors_to_try.append(params.semanticSelector)
+
+	# Priority 2: Optimized selector
+	optimized_selector = optimize_complex_selector(selector, params)
+	if optimized_selector and optimized_selector != original_selector:
+		selectors_to_try.append(optimized_selector)
+
+	# Priority 3: Original selector
+	selectors_to_try.append(original_selector)
+
+	# Priority 4: Fallback selectors from params
+	if params and hasattr(params, 'fallbackSelectors') and params.fallbackSelectors:
+		selectors_to_try.extend(params.fallbackSelectors)
+
+	# Priority 5: Generated fallback selectors
+	generated_fallbacks = generate_stable_selectors(optimized_selector or selector, params)
+	selectors_to_try.extend(generated_fallbacks)
+
+	# Try each selector with balanced timeout strategy
+	for i, try_selector in enumerate(selectors_to_try):
+		# Balanced timeout strategy: 5s -> 3s -> 2s -> 1s
+		if i == 0:  # Primary selector (most likely to work)
+			current_timeout = timeout_ms  # Full 5 seconds
+		elif i <= 2:  # Semantic and optimized selectors
+			current_timeout = min(timeout_ms * 0.6, 3000)  # 3 seconds
+		elif i <= 4:  # First few fallbacks
+			current_timeout = min(timeout_ms * 0.4, 2000)  # 2 seconds
+		else:  # Remaining fallbacks
+			current_timeout = min(timeout_ms * 0.2, 1000)  # 1 second
+
 		try:
-			logger.info(f'Trying selector: {truncate_selector(try_selector)}')
+			logger.info(f'Trying selector {i+1}/{len(selectors_to_try)} ({current_timeout}ms): {truncate_selector(try_selector)}')
 			locator = page.locator(try_selector)
-			await locator.wait_for(state='visible', timeout=timeout_ms)
-			logger.info(f'Found element with selector: {truncate_selector(try_selector)}')
+			await locator.wait_for(state='visible', timeout=current_timeout)
+			logger.info(f'✅ Found element with selector: {truncate_selector(try_selector)}')
 			return locator, try_selector
 		except Exception as e:
-			logger.error(f'Selector failed: {truncate_selector(try_selector)} with error: {e}')
+			logger.debug(f'❌ Selector failed: {truncate_selector(try_selector)} - {str(e)[:100]}')
 
 	# Try XPath as last resort
 	if params and getattr(params, 'xpath', None):
@@ -46,6 +77,46 @@ async def get_best_element_handle(page, selector, params=None, timeout_ms=500):
 			logger.error(f'All XPaths failed with error: {e}')
 
 	raise Exception(f'Failed to find element. Original: {original_selector}')
+
+
+def optimize_complex_selector(selector, params=None):
+	"""Optimize complex CSS selectors to simpler, faster alternatives"""
+	if not selector:
+		return None
+
+	# Extract key attributes that make good selectors
+	import re
+
+	# Priority 1: ID selector
+	id_match = re.search(r'\[id="([^"]+)"\]', selector)
+	if id_match:
+		return f"#{id_match.group(1)}"
+
+	# Priority 2: Name attribute
+	name_match = re.search(r'\[name="([^"]+)"\]', selector)
+	if name_match:
+		tag = extract_element_tag(selector, params) or "input"
+		return f"{tag}[name='{name_match.group(1)}']"
+
+	# Priority 3: Data attributes (test IDs)
+	data_cy_match = re.search(r'\[data-cy="([^"]+)"\]', selector)
+	if data_cy_match:
+		return f"[data-cy='{data_cy_match.group(1)}']"
+
+	data_testid_match = re.search(r'\[data-testid="([^"]+)"\]', selector)
+	if data_testid_match:
+		return f"[data-testid='{data_testid_match.group(1)}']"
+
+	# Priority 4: Simplify nth-of-type chains
+	if 'nth-of-type' in selector and len(selector) > 100:
+		# Extract the last meaningful part
+		parts = selector.split(' > ')
+		if len(parts) > 3:
+			# Keep last 2-3 parts for specificity
+			simplified = ' > '.join(parts[-3:])
+			return simplified
+
+	return None
 
 
 def generate_stable_selectors(selector, params=None):

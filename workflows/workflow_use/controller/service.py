@@ -20,7 +20,7 @@ from workflow_use.controller.views import (
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_ACTION_TIMEOUT_MS = 10000  # Increased to 10 seconds for better reliability
+DEFAULT_ACTION_TIMEOUT_MS = 5000  # Balanced 5 seconds for faster fallback with good reliability
 
 # List of default actions from browser_use.controller.service.Controller to disable
 # todo: come up with a better way to filter out the actions (filter IN the actions would be much nicer in this case)
@@ -59,6 +59,55 @@ class WorkflowController(Controller):
 		super().__init__(*args, exclude_actions=DISABLED_DEFAULT_ACTIONS, **kwargs)
 		self.__register_actions()
 
+	async def _wait_for_application_stability(self, action_type: str, element_info: str = ""):
+		"""Universal method to wait for application to stabilize after any action"""
+		import asyncio
+
+		# Base wait for DOM updates
+		await asyncio.sleep(0.5)
+
+		# Wait for network stability (AJAX calls, API requests)
+		try:
+			await self.browser._wait_for_stable_network(timeout=3000)
+			logger.debug(f"Network stabilized after {action_type}")
+		except Exception as e:
+			logger.debug(f"Network wait timeout after {action_type}: {e}")
+
+		# Wait for any loading indicators to disappear
+		try:
+			page = await self.browser.get_current_page()
+
+			# Common loading selectors
+			loading_selectors = [
+				'.loading', '.spinner', '[data-loading="true"]',
+				'.css-loading', '[aria-busy="true"]', '.loader'
+			]
+
+			for selector in loading_selectors:
+				try:
+					await page.wait_for_selector(selector, state='hidden', timeout=2000)
+					logger.debug(f"Loading indicator {selector} disappeared")
+				except:
+					continue  # Selector not found or already hidden
+
+		except Exception as e:
+			logger.debug(f"Loading indicator check failed: {e}")
+
+		# Additional wait based on action type
+		if action_type == 'click':
+			# Check if this was a submit button or navigation-triggering element
+			if 'submit' in element_info.lower() or 'login' in element_info.lower() or 'sign in' in element_info.lower():
+				await asyncio.sleep(3.0)  # Extra time for form submission and page navigation
+				logger.debug(f"Extended wait for submit/navigation button: {element_info}")
+			else:
+				await asyncio.sleep(1.5)  # Standard time for click reactions
+		elif action_type == 'input':
+			await asyncio.sleep(0.5)  # Time for input validation
+		elif action_type == 'navigation':
+			await asyncio.sleep(2)  # Time for page transitions
+
+		logger.debug(f"Application stability wait completed for {action_type}")
+
 	def __register_actions(self):
 		# Navigate to URL ------------------------------------------------------------
 		@self.registry.action('Manually navigate to URL', param_model=NavigationAction)
@@ -67,6 +116,9 @@ class WorkflowController(Controller):
 			page = await browser_session.get_current_page()
 			await page.goto(params.url)
 			await page.wait_for_load_state()
+
+			# Wait for application stability after navigation
+			await self._wait_for_application_stability('navigation', params.url)
 
 			msg = f'🔗  Navigated to URL: {params.url}'
 			logger.info(msg)
@@ -91,6 +143,9 @@ class WorkflowController(Controller):
 					timeout_ms=DEFAULT_ACTION_TIMEOUT_MS,
 				)
 				await locator.click(force=True)
+
+				# Wait for application stability after click
+				await self._wait_for_application_stability('click', selector_used)
 
 				msg = f'🖱️  Clicked element with CSS selector: {truncate_selector(selector_used)} (original: {truncate_selector(original_selector)})'
 				logger.info(msg)
@@ -146,6 +201,9 @@ class WorkflowController(Controller):
 						logger.warning(f"Input verification failed. Expected: {params.value}, Actual: {actual_value}")
 				except:
 					pass  # Some elements might not support input_value()
+
+				# Wait for application stability after input
+				await self._wait_for_application_stability('input', selector_used)
 
 				msg = f'⌨️  Input "{params.value}" into element with CSS selector: {truncate_selector(selector_used)} (original: {truncate_selector(original_selector)})'
 				logger.info(msg)
@@ -241,7 +299,21 @@ class WorkflowController(Controller):
 			prompt = 'Your task is to extract the content of the page. You will be given a page and a goal and you should extract all relevant information around this goal from the page. If the goal is vague, summarize the page. Respond in json format. Extraction goal: {goal}, Page: {page}'
 			template = PromptTemplate(input_variables=['goal', 'page'], template=prompt)
 			try:
-				output = await page_extraction_llm.ainvoke(template.format(goal=params.goal, page=content))
+				formatted_prompt = template.format(goal=params.goal, page=content)
+				output = await page_extraction_llm.ainvoke(formatted_prompt)
+
+				# Track token usage for page extraction
+				try:
+					from workflow_use.hybrid.token_tracker import track_llm_call
+					# Estimate token usage for page extraction
+					input_tokens = len(formatted_prompt.split()) * 1.3
+					output_tokens = len(output.content.split()) * 1.3
+					model_name = getattr(page_extraction_llm, 'model_name', 'page-extraction-llm')
+					track_llm_call(model_name, int(input_tokens), int(output_tokens))
+					logger.debug(f"Tracked page extraction: {int(input_tokens + output_tokens)} tokens")
+				except Exception as e:
+					logger.debug(f"Token tracking failed for page extraction: {e}")
+
 				msg = f'📄  Extracted from page\n: {output.content}\n'
 				logger.info(msg)
 				return ActionResult(extracted_content=msg, include_in_memory=True)

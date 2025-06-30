@@ -12,6 +12,41 @@ from langchain_core.messages import HumanMessage
 logger = logging.getLogger(__name__)
 
 
+def _extract_model_name(llm) -> str:
+    """Extract the actual model name from LLM instance"""
+    try:
+        # Try different attributes where model name might be stored
+        if hasattr(llm, 'model_id'):
+            return llm.model_id
+        elif hasattr(llm, 'model_name'):
+            return llm.model_name
+        elif hasattr(llm, 'model'):
+            return llm.model
+        elif hasattr(llm, '_model_id'):
+            return llm._model_id
+        elif hasattr(llm, 'model_kwargs') and 'model_id' in llm.model_kwargs:
+            return llm.model_kwargs['model_id']
+        elif hasattr(llm, 'model_kwargs') and 'model' in llm.model_kwargs:
+            return llm.model_kwargs['model']
+        else:
+            # Fallback: try to extract from class name or string representation
+            llm_str = str(llm)
+            if 'claude-3-5-sonnet' in llm_str.lower():
+                return 'anthropic.claude-3-5-sonnet-20241022-v2:0'
+            elif 'claude-3-haiku' in llm_str.lower():
+                return 'anthropic.claude-3-haiku-20240307-v1:0'
+            elif 'gpt-4' in llm_str.lower():
+                return 'gpt-4'
+            elif 'gpt-3.5' in llm_str.lower():
+                return 'gpt-3.5-turbo'
+            else:
+                logger.warning(f"Could not extract model name from LLM: {type(llm).__name__}")
+                return f"{type(llm).__name__}-unknown"
+    except Exception as e:
+        logger.warning(f"Error extracting model name: {e}")
+        return "unknown-model"
+
+
 def extract_code_content(text: str) -> str:
     """Extract code from markdown code blocks if present"""
     # Look for content between triple backticks with optional language identifier
@@ -80,7 +115,21 @@ Convert the provided test case following these rules, ensuring ALL specific valu
         # Generate Gherkin using LLM
         response = llm.invoke([HumanMessage(content=gherkin_prompt)])
         gherkin_content = extract_code_content(response.content)
-        
+
+        # Track token usage if available
+        try:
+            from workflow_use.hybrid.token_tracker import track_llm_call
+            # Estimate token usage (rough approximation)
+            input_tokens = len(gherkin_prompt.split()) * 1.3  # Rough token estimation
+            output_tokens = len(gherkin_content.split()) * 1.3
+
+            # Extract proper model name from LLM instance
+            model_name = _extract_model_name(llm)
+            track_llm_call(model_name, int(input_tokens), int(output_tokens))
+            logger.debug(f"Tracked Gherkin conversion: {model_name} - {int(input_tokens + output_tokens)} tokens")
+        except Exception as e:
+            logger.debug(f"Token tracking failed for Gherkin conversion: {e}")
+
         logger.info("Successfully converted text to Gherkin scenario")
         return gherkin_content
         
