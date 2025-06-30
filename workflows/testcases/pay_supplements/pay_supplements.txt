@@ -1,0 +1,22 @@
+# Pay supplements Tests
+Feature: Pay supplements
+
+Scenario: Edit pay supplement under processing
+    Go to https://release-app.usemultiplier.com
+    login with email:tester+bullertest@usemultiplier.com password:Password@123
+    Click on Administration button from the left nav bar
+    Verify the Pay supplements option is visible under Adminstration
+    Click to Pay supplements sections
+    Verify Add pay supplement button is visible
+    Click on Add pay supplement button
+    Search for an employee with name 'Ava Pope'
+    Click on Select employee button and wait for the page to load so that the input fields become editable
+    Select the pay supplement type 'Bonus [1]_bullet'
+    Enter the amount as '1234'
+    Select the billing frequency value as 'Monthly' from the dropdown without selecting do not proceed to next step
+    Verify the payschedule is selected as 'Monthly'
+    Verify 'fixed number of recurring payments?' is selected as 'No' by default
+    Select the 'start date' as 'today's date'
+    Scroll down so that the submit pay supplements button becomes visible
+    Verify the submit pay supplements button is enabled
+    Close the browser

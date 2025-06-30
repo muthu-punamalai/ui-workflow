@@ -1,0 +1,129 @@
+Feature: EOR onboarding Spain
+
+Scenario:
+    Go to https://release-app.usemultiplier.com
+    login with email:tester+bullertest@usemultiplier.com password:Password@123
+    Click on 'Hire & onboard' option from the left nav bar
+    Click on 'EOR employee' tile in the list
+    Click 'Select country' dropdown, type ESP in the search field. Select 'Spain' option from the dropdown values
+    Click 'Yes' for 'Yes, they are a citizen or permanent resident of the country', and click on Continue button
+    Enter <random first name> in 'First and Middle Name(s)', <random last name> in 'Last Name', '1234 Elm Street' in 'Address', click on Gender dropdown and select 'Male' from the list of values
+    Enter 'tester+<random_number>@usemultiplier.com' in 'Personal Email Address' field
+    Scroll down until 'Job Title' field is visible
+    Enter 'Madrid' in the 'City' field, '12345' in the 'Postal Code/Zip Code' field, 'A12345' in the 'Documento Nacional de Identidad (DNI)' field,'99988999' in 'Phone Number' field
+    Click 'Nationality' dropdown, type 'ESP' in the search field. Select Spain from the dropdown values
+    Scroll down until 'Job Title' field is visible
+    Enter 'Software engineer' in 'Job Title' field
+    Click on the Employment Start Date field to open the calendar
+    Repeat to click on the next month arrow in the calendar until at least one selectable date is enabled
+    Click on the first enabled date in the calendar
+    Scroll down until Continue button is visible
+    Verify that Continue button is enabled
+    Click on Continue button
+    Verify Gross salary title is visible
+    Verify currency EUR is visible
+    Enter 10000 in Amount field
+    Click 'per' dropdown and select 'Month' from the list of values
+    Click on Additional pay item button
+    Click on Allowance type dropdown, type 'Joining Bonus' in search field. Select Joining Bonus from dropdown values
+    Verify currency EUR is visible
+    Enter 500 in Amount field
+    Click 'Frequency' dropdown and select Monthly from the list of values
+    Select 'Yes' for 'Do you want to pay in a fixed number of recurring payments?'
+    Verify Start date is auto filled
+    Enter 3 in 'No. of recurring payments' field
+    Click on Add button
+    Scroll down until Continue button is visible
+    Verify that Continue button is enabled
+    Click on Continue button
+    Verify that Continue button is enabled
+    Click on Continue button
+    Verify that Annual leave is 23 days, Probation Policy is 3 months
+    Scroll down until Background verification is visible
+    Verify that Notice Period is 15 days, Non-compete is 6 months
+    Click on Continue button
+    Wait until text 'Review Details and Send Contract' is visible
+    Verify that 'Review Contract' and 'Send Contract' buttons are present
+    Click on 'Send contract' button
+    Wait until text 'Waiting for Employer's signature' is visible
+    Navigate to Gmail (https://gmail.com)
+    Login to Gmail with email: tester@usemultiplier.com
+    Enter password: ZKNh\8P0c501
+    Click Next button
+    Open the email with subject 'Review and Sign <Firstname+Lastname>'s Employment contract' with receipient email 'tester+cullen.mcdowell@usemultiplier.com'
+    Click on Open the Document button and switch to this tab
+    Click 'Review Agreement and Sign' button
+    Click Start button in the Pandadoc template
+    Click on Signature field
+    Click 'Accept and sign' button
+    Click Date field. Choose today's date from the calendar. Click Next button.
+    Click on Signature field
+    Click Date field. Choose today's date from the calendar. Click Next button.
+    CLick Finish
+    Navigate back to tester@usemultiplier.com gmail tab
+    Open the email with subject 'Employment contract from Bullet India' with receipient email 'tester+<random_number>@usemultiplier.com'
+    Click on Review Contract and Sign button and switch to this tab
+    Click 'Review Agreement and Sign' button
+    Click Start button in the Pandadoc template
+    Click on Signature field
+    Click 'Accept and sign' button
+    Click Date field. Choose today's date from the calendar. Click Next button.
+    Click on Signature field
+    Click Date field. Choose today's date from the calendar. Click Next button.
+    CLick Finish
+    Navigate back to tester@usemultiplier.com gmail tab
+    Open the email with subject 'Additional Details required for your Onboarding at Multiplier' with receipient email 'tester+<random_number>@usemultiplier.com'
+    Click Get Started button
+    Input 'Password22#' in the 'Password' field
+    Input 'Password22#' in the 'Confirm Password' field
+    Enable checkbox 'I agree to the Terms & Conditions'
+    Click 'Sign in' button
+    Click 'Get Started' button 
+    Click on 'Date of Birth' field
+    Click on the calendar header to open month/year picker
+    Click on the year dropdown
+    Scroll down until year '2000' is visible and click on year 2000
+    Click on month 'Jan' and click on date '1'     
+    Click 'Marital Status'. Choose Married from the dropdown values
+    Click 'Phone Number'. Input value '94678678'
+    Vertical scroll to Continue button
+    Click Continue button
+    Enter P12345 in 'spouse-children-dni-passport-nie' field
+    Click Continue button
+    Enter <name> in Account Holder Name
+    Enter 'BBVAESMMXXX' in BIC/SWIFT Code for SEPA field
+    Enter 'CaixaBank' in Bank Name field
+    Click on 'Bank Country' dropdown
+    Scroll down until 'Spain' is visible and click on 'Spain' from the dropdown values 
+    Enter 'ES9121000418450200051332' in IBAN field
+    Click on Upload File and upload a dummy pdf file
+    Click Continue button
+    Click on Upload File and upload a dummy pdf file for 'Passport Copy'
+    Click Continue button
+    Click Continue button
+    Wait until text 'Review & Confirm' is visible
+    Click Confirm button
+    Click on View Forms button
+    Verify text 'Payroll & Compliance Forms' is visible
+    Upload dummy pdf file for NIE Document
+    Upload dummy pdf file for Modelo-145
+    Upload dummy pdf file for Employee Onboarding Form
+    Scroll down until Submit Documents button is visible
+    Click Submit Documents button
+    Click Submit button in the popup
+    Goto https://release-ops.usemultiplier.com/login
+    Login with email:nathan+ops@usemultiplier.com password:password
+    Click on 'Members' from the left sidebar
+    Click on 'Onboarding' under view members section
+    Click Filters button
+    In 'Filter by' dropdown, choose 'Member Name' value. Input First and last name separated by space in matching field
+    Click Apply filter
+    Open the member from the search result
+    Wait until Start Verification button is enabled
+    Click Start Verification
+    Click Complete Verification
+    Click Yes button in the popup
+    Click Complete Activation
+    Click Activate in the popup
+    Verify that Contract Status is ACTIVE
+    Close the browser

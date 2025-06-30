@@ -1,0 +1,73 @@
+Feature: GP Direct Employee Onboarding Spain
+
+Scenario: Onboard GP direct employee using single onboarding
+    Go to https://release-app.usemultiplier.com
+    login with email:tester+bullertest@usemultiplier.com password:Password@123
+    Click on 'Hire & onboard' option from the left nav bar
+    Wait until 'Direct employee' tile is visible under 'Who would you like to onboard?' and click 'Direct employee' tile
+    Click 'Entity' dropdown, type bullet-gp-spain in the search field. Select bullet-gp-spain option from the dropdown values
+    Verify 'Multiple in one-go' and 'Individually' tile are visible
+    Click on 'Individually' tile
+    Enter <random first name> in 'First and Middle Name(s)' field, <random last name> in 'Last Name' field
+    Click on Gender dropdown and select 'Female' from the list of values
+    Enter 'tester+<random_number>@usemultiplier.com' in 'Personal Email Address' field
+    Enter <random 5 digit number> in 'Employee ID' field
+    Enter '1234 Elm Street' in 'Address' field
+    Scroll down until 'Job Title' field is visible
+    Enter 'Madrid' in the 'City' field, '12345' in the 'Postal Code/Zip Code' field, 'A12345' in the 'Documento Nacional de Identidad (DNI)' field,'99988999' in 'Phone Number' field
+    Click 'Nationality' dropdown, type 'ESP' in the search field. Select Spain from the dropdown values
+    Enter 'Software engineer' in 'Job Title' field
+    Scroll down to bottom of the page
+    Click 'Department' dropdown. Select 'Engineering' from the dropdown values
+    Click on the Employment Start Date field to open the calendar
+    Click on the date '1' from the visible calendar (current month)
+    Scroll down until Continue button is visible
+    Verify that Continue button is enabled
+    Click on Continue button
+    Verify Base pay title is visible
+    Verify currency EUR is visible
+    Enter 10000 in Amount field
+    Click 'per' dropdown and select 'Month' from the list of values
+    Click on the Start date field to open the calendar
+    Click on the date '1' from the visible calendar (current month)
+    Click on Additional pay item button
+    Click on Allowance type dropdown, type 'Contract allowance 1' in search field. Select Contract allowance 1 from dropdown values
+    Verify currency EUR is visible
+    Enter 500 in Amount field
+    Click 'Frequency' dropdown and select One-Time from the list of values
+    Verify that No. of recurring payments is auto filled as 1 and it is non-editable
+    Verify Start date is auto filled
+    Click on Add button
+    Scroll down until Continue button is visible
+    Verify that Continue button is enabled
+    Click on Continue button
+    Enter <name> in Account Holder Name
+    Enter 'BBVAESMMXXX' in BIC/SWIFT Code for SEPA field
+    Enter 'CaixaBank' in Bank Name field
+    Click on 'Bank Country' dropdown
+    Scroll down until 'Spain' is visible and click on 'Spain' from the dropdown values
+    Enter 'ES9121000418450200051332' in IBAN field
+    Scroll down until Continue button is visible
+    Verify that Continue button is enabled
+    Click on Continue button
+    Verify Browse file button is visible
+    Verify that Continue button is enabled
+    Click on Continue button
+    Wait until text 'Review Details of the employee' is visible
+    Scroll up until Add employee button is visible
+    Click on Add employee button
+    Wait until banner with text 'Employee doesn't have access to Multiplier yet' is visible
+    Click on Invite employee button
+    Wait until banner with text 'Employee doesn't have access to Multiplier yet' is not visible
+    Navigate to Gmail (https://gmail.com)
+    Login to Gmail with email: tester@usemultiplier.com
+    Enter password: ZKNh\8P0c501
+    Click Next button
+    Open the email with subject 'Login to Multiplier. Create your account for salary payments from Bullet India' with receipient'tester+<random_number>@usemultiplier.com'
+    Click Get Started button and switch to this tab
+    Enter 'Password22#' in the 'Password' field
+    Enter 'Password22#' in the 'Confirm Password' field
+    Enable checkbox 'I agree to the Terms & Conditions'
+    Click 'Sign in' button
+    Click on dashboard from the left sidebar
+    Close the browser

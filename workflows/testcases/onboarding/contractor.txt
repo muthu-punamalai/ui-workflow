@@ -1,0 +1,78 @@
+# Onboarding Tests
+Feature: Onboard COR contractor
+
+Scenario: Onboard COR contract
+    Go to https://release-app.usemultiplier.com
+    login with email:tester+bullertest@usemultiplier.com password:Password@123
+    Click on 'Hire & onboard' option from the left nav bar
+    Click on 'Contractor' tile in the list
+    Click 'Add Contractor' option in the 'How do you want to add Contractor?' dialog box
+    CLick 'Select country' dropdown, type IND in the search field. Select 'India' option from the dropdown values
+    CLick 'Pay a contractor' option
+    Click Continue in the Engagement Screen
+    Enter <random first name> in 'First and Middle Name(s)' field, <random last name> in 'Last Name' field
+    Click on Gender dropdown and select 'Female' from the list of values
+    Enter 'tester+<random_number>@usemultiplier.com' in 'Personal Email Address' field
+    Enter 'Software Developer' in 'Title' field
+    Click 'Contract Start Date' field. When the calendar appears, navigate to the current month if needed. Then click on the "1" date (first day of current month).
+    Click Continue in the Basic Details Screen
+    Verify if 'Fixed rate' option is pre-selected by default for 'Billing type'
+    Verify if 'INR' currency is chosen in the Billing rate
+    Input currency as '100000' in the Billing rate type text field
+    Verify if 'Month' is pre-selected in the dropdown for 'Billing rate per'
+    Verify if 'Monthly' option is pre-selected by default for 'Payment frequency'
+    Vertical Scroll to the next view in page
+    Click on Remind contractor date picker field. Choose date as 5 in the month
+    Click Continue in the Compensation Screen
+    Vertical Scroll to the next view in page
+    Click Continue in the Insurance Screen
+    Click Upload My own document
+#    Upload a dummy file
+    Click Continue in the Contract Screen
+    CLick Confirm in the Review Contract dialog 
+    Click Review Details and Confirm button
+    Navigate to Gmail (https://gmail.com)
+    Login to Gmail with email: tester@usemultiplier.com
+    Enter password: ZKNh\8P0c501
+    Click Sign in button
+    Open the email with subject 'Additional Details required for your Onboarding at Bullet India' filterered to 'Personal Email Address'
+    Click Get Started button
+    Input 'Password22#' in the 'Password' field
+    Input 'Password22#' in the 'Confirm Password' field
+    Enable checkbox 'I agree to the Terms & Conditions' and Click 'Sign in' button
+    Click 'Get Started' button
+    Click 'Date of Birth' field. Choose Year 2000, Month June, Date 25
+    Click 'Marital Status'. Choose Married from the dropdown values
+    Click 'Father/Husband name' dropdown. Select 'Father name' Provide input as 'ABC' in Add Name field
+    Click 'Identity proof' dropdown. Select 'Aadhar No.' Provide input as '123' in Add Number field
+    Click 'Phone Number'. Input value '94678678'
+    Click 'Current Address'. Input value '5th street'
+    Input 'City' field with value 'ABC'
+    Input 'Postal Code/Zip code' with value '12123'
+    Vertical scroll to Continue button
+    Click Continue button
+    Click 'Bank Account Type' dropdown. Choose Local bank account.
+    Input 'ABC ABC" in 'Full name of the account holder' field
+    Input 'SBIN0001067 in IFSC code field
+    Input '121212' in Account number field
+    Click 'Bank Country' Dropdown. Search for India. Choose India from the values
+    Input '1212' in 'Bank Postal Code' field
+    Input 'ABC' in 'Bank City' field
+    Input 'ABC ABC' in 'Receipient address' field
+    Click Upload File and upload some dummy Document
+    Click Continue button
+    Click Upload File option in 'Identity Proof/Passport Copy' and upload some dummy document
+    Click Upload File option in 'Address Proof' and upload some dummy document
+    Click Continue button
+    Click Confirm button
+    Go to https://release-ops.usemultiplier.com
+    login with email:nathan+ops@usemultiplier.com password:password
+    Click on members
+    Click Filters button
+    In 'Filter by' dropdown, choose 'Member Name' value. Input First and last name separated by space in matching field
+    Click Apply filter
+    Open the member from the search result
+    Click Start Verification
+    Click Verification Complete and Click 'Yes' In 'Mark Member as Verified' screen
+    Click Activate Member
+    Verify that Contract Status is ACTIVE

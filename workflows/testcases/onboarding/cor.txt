@@ -1,0 +1,91 @@
+# Onboarding Tests
+Feature: Onboard COR contractor
+
+Scenario: Onboard COR contract
+    Go to https://release-app.usemultiplier.com
+    login with email:tester+bullertest@usemultiplier.com password:Password@123
+    Click on 'Hire & onboard' option from the left nav bar
+    Click on 'Contractor' tile in the list
+    Click 'Add Contractor' option in the 'How do you want to add Contractor?' dialog box
+    CLick 'Select country' dropdown, type IND in the search field. Select 'India' option from the dropdown values
+    CLick 'Contractor of Record' option
+    Click 'Yes' for Question 1 - under 'Relevant practices in the agreement include' in  COR Terms section
+    Vertical Scroll to the next view in page
+    Click 'Yes' for Question 2 - 'work is NOT characterized by any of the following unsupported roles'
+    Click Continue in the Engagement Screen
+    Input 'First and Middle Name(s)' text field with value 'John'
+    Input 'Last Name' text field with value 'Doe'
+    Click 'Gender' dropdown, Select 'Male' value in the dropdown
+    Input 'Personal Email Address' text field with value 'tester+john_doe_test3@usemutiplier.com'
+    Click 'Agreement Start Date' field. When the calendar appears, navigate to the current month if needed. Then click on the "1" date (first day of current month).
+    Click 'Agreement End Date' field. When the calendar appears, navigate to the next month (use the month/year selector at the top of the calendar if required). Then click on the same day as today's date. For example, if today is May 15, 2024 (Choose the year selector as 2024, Choose month June and date as 15)
+    Click Continue in the Basic Details Screen
+    Verify if 'Fixed rate' option is pre-selected by default for 'Billing type'
+    Verify if 'INR' currency is chosen in the Billing rate
+    Input currency as '100000' in the Billing rate type text field
+    Verify if 'Month' is pre-selected in the dropdown for 'Billing rate per'
+    Verify if 'Monthly' option is pre-selected by default for 'Payment frequency'
+    Vertical Scroll to the next view in page
+    Click on Remind contractor date picker field. Choose date as 5 in the month
+    Click Continue in the Compensation Screen
+    Vertical Scroll to the next view in page
+    Click Continue in the Insurance Screen
+    Click Continue in the Compliance Screen
+    Click on work title dropdown and select first dropdown value
+    Click Continue in the Work Details Screen
+    Navigate to Gmail (https://gmail.com)
+    Login to Gmail with email: tester@usemultiplier.com
+    Enter password: ZKNh\8P0c501
+    Click Sign in button
+    Open the email with subject 'Agreement from Multiplier' filterered to 'Personal Email Address' with 'tester+john_doe_test3@usemutiplier.com'
+    Click 'Review Agreement and Sign' button
+    Click Start button in the Pandadoc template
+    Click on Signature field
+    Click 'Accept and sign' button
+    Click Date field. Choose today's date from the calendar. Click Next button.
+    Click on Signature field
+    Click Date field. Choose today's date from the calendar. Click Next button.
+    CLick Finish
+    Open the email with subject 'Additional Details required for your Onboarding at Multiplier' filterered to 'Personal Email Address' with 'tester+john_doe_test3@usemutiplier.com'
+    Click Get Started button
+    Input 'Password22#' in the 'Password' field
+    Input 'Password22#' in the 'Confirm Password' field
+    Enable checkbox 'I agree to the Terms & Conditions'
+    Click 'Sign in' button
+    Click 'Get Started' button
+    Click 'Date of Birth' field. Choose Year 2000, Month June, Date 25
+    Click 'Marital Status'. Choose Married from the dropdown values
+    Click 'Phone Number'. Input value '94678678'
+    Click 'Current Address'. Input value '5th street'
+    Input 'City' field with value 'ABC'
+    Input 'Postal Code/Zip code' with value '12123'
+    Vertical scroll to Continue button
+    Click Continue button
+    Click 'Identity proof' dropdown. Select 'Aadhar No.' Provide input as '123' in Add Number field
+    Click 'Father/Husband name' dropdown. Select 'Father name' Provide input as 'ABC' in Add Name field
+    Click Continue button
+    Click 'Bank Account Type' dropdown. Choose Local bank account.
+    Input 'ABC ABC" in 'Full name of the account holder' field
+    Input 'SBIN0001067 in IFSC code field
+    Input '121212' in Account number field
+    Click 'Bank Country' Dropdown. Search for India. Choose India from the values
+    Input '1212' in 'Bank Postal Code' field
+    Input 'ABC' in 'Bank City' field
+    Input 'ABC ABC' in 'Receipient address' field
+    Click Upload File and upload some dummy Document
+    Click Continue button
+    Click Upload File option in 'Identity Proof/Passport Copy' and upload some dummy document
+    Click Upload File option in 'Address Proof' and upload some dummy document
+    Click Continue button
+    Click Confirm button
+    Go to https://release-app.usemultiplier.com
+    login with email:nathan+ops@usemultiplier.com password:password
+    Click on members
+    Click Filters button
+    In 'Filter by' dropdown, choose 'Member Name' value. Input First and last name separated by space in matching field
+    Click Apply filter
+    Open the member from the search result
+    Click Start Verification
+    Click Verification Complete
+    Click Activate
+    Verify that Contract Status is ACTIVE
