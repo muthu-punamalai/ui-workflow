@@ -19,4 +19,11 @@ Scenario: Edit pay supplement under processing
     Select the 'start date' as 'today's date'
     Scroll down so that the submit pay supplements button becomes visible
     Verify the submit pay supplements button is enabled
+    Click on submit pay supplements button
+    Verify the popup message is displayed with text 'Pay supplement was added successfully'
+    Click to pending tab
+    Verify the employee name 'Ava Pope' is visible in the list
+    Verify the amount is '1234'
+    Verify the pay supplement type is 'Bonus [1]_bullet'
+    Verify the status is 'Pending'
     Close the browser

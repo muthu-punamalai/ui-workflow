@@ -149,20 +149,32 @@ class StepTracker:
 
     @staticmethod
     def _process_explicit_step_tracking(
-        gherkin_steps: List[str], 
-        step_starts: List[str], 
-        step_results_found: List[Tuple[str, str]], 
+        gherkin_steps: List[str],
+        step_starts: List[str],
+        step_results_found: List[Tuple[str, str]],
         all_failures: List[Tuple[str, str]]
     ) -> List[Dict[str, Any]]:
         """Process explicit step tracking information"""
         step_results = []
 
+        # Check if there are any overall failure indicators
+        has_overall_failure = any('task completed without success' in message.lower() or
+                                'blocker encountered' in message.lower() or
+                                'execution incomplete' in message.lower() or
+                                'gherkin scenario execution incomplete' in message.lower()
+                                for _, message in step_results_found + all_failures)
+
         for i, step in enumerate(gherkin_steps):
+            # Default status depends on whether there's an overall failure
+            default_status = 'FAILED' if has_overall_failure else 'PASSED'
+            default_message = ('Step likely failed due to overall execution failure' if has_overall_failure
+                             else 'Step executed successfully')
+
             step_info = {
                 'step_number': i + 1,
                 'step_text': step,
-                'status': 'PASSED',  # Default to PASSED if execution completed successfully
-                'message': 'Step executed successfully',
+                'status': default_status,
+                'message': default_message,
                 'timestamp': datetime.now().isoformat(),
                 'execution_order': i + 1
             }
@@ -173,12 +185,17 @@ class StepTracker:
             # Look for matching step in results
             for j, (status, message) in enumerate(step_results_found):
                 if StepTracker._steps_match(step, message) or i == j:
-                    step_info['status'] = status.upper()
-                    step_info['message'] = message.strip()
+                    # If there's an overall failure, don't override with PASSED
+                    if has_overall_failure and status.upper() == 'PASSED':
+                        # Keep the default FAILED status but update the message
+                        step_info['message'] = f"Step tracking shows PASSED but overall execution failed: {message.strip()}"
+                    else:
+                        step_info['status'] = status.upper()
+                        step_info['message'] = message.strip()
                     step_found = True
                     break
 
-            # Check for failures
+            # Check for failures (these always override)
             for status, message in all_failures:
                 if StepTracker._steps_match(step, message):
                     step_info['status'] = 'FAILED'
@@ -229,10 +246,17 @@ class StepTracker:
         # Get overall execution status
         overall_status = 'PASSED'  # Default assumption
 
+        # Check for final status indicators first
+        final_status_indicators = history_data.get('final_status_indicators', [])
+        if 'FAILED' in final_status_indicators:
+            overall_status = 'FAILED'
+            logger.info("Overall status set to FAILED based on final status indicators")
+
         # Check for errors in history
         errors = history_data.get('errors', [])
         parsing_failures = False
         agent_failures = False
+        task_completion_failures = False
 
         for error in errors:
             if isinstance(error, str):
@@ -243,6 +267,10 @@ class StepTracker:
                 elif 'result failed' in error_lower:
                     agent_failures = True
                     overall_status = 'FAILED'
+                elif 'task completed without success' in error_lower or 'blocker encountered' in error_lower:
+                    task_completion_failures = True
+                    overall_status = 'FAILED'
+                    logger.info(f"Task completion failure detected: {error[:100]}...")
                 else:
                     overall_status = 'FAILED'
 
@@ -281,7 +309,10 @@ class StepTracker:
             # If we couldn't determine status from actions, use overall status
             if step_info['status'] == 'INFERRED':
                 if overall_status == 'FAILED':
-                    if parsing_failures:
+                    if task_completion_failures:
+                        step_info['status'] = 'FAILED'
+                        step_info['message'] = 'Task execution blocked - unable to complete due to business logic constraints or data conflicts'
+                    elif parsing_failures:
                         step_info['status'] = 'FAILED'
                         step_info['message'] = 'AI model parsing error - response could not be processed (possible token limit or format issue)'
                     elif agent_failures:
@@ -308,7 +339,13 @@ class StepTracker:
         """Categorize error content for better failure messages"""
         error_lower = error_content.lower()
 
-        if 'element not found' in error_lower or 'no such element' in error_lower:
+        if 'blocker encountered' in error_lower or 'unable to proceed' in error_lower:
+            return 'Business logic blocker - execution stopped due to data conflicts or validation errors'
+        elif 'task completed without success' in error_lower:
+            return 'Task execution failed - completed but did not achieve success criteria'
+        elif 'email conflict' in error_lower or 'already has an ongoing contract' in error_lower:
+            return 'Data conflict error - duplicate or conflicting data prevented operation completion'
+        elif 'element not found' in error_lower or 'no such element' in error_lower:
             return 'Element location failed - target element not found on page'
         elif 'timeout' in error_lower:
             return 'Operation timeout - element or condition not met within time limit'

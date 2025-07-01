@@ -3,9 +3,7 @@ from __future__ import annotations
 import asyncio
 import json
 import os
-import subprocess
 import tempfile  # For temporary file handling
-import webbrowser
 from pathlib import Path
 
 import typer
@@ -642,29 +640,7 @@ def run_test_suite_command(
 	return asyncio.run(_run_test_suite())
 
 
-@app.command('launch-gui', help='Launch the workflow visualizer GUI.')
-def launch_gui():
-	"""Launch the workflow visualizer GUI."""
-	typer.echo(typer.style('Launching workflow visualizer GUI...', bold=True))
 
-	logs_dir = Path('./tmp/logs')
-	logs_dir.mkdir(parents=True, exist_ok=True)
-	backend_log = open(logs_dir / 'backend.log', 'w')
-	frontend_log = open(logs_dir / 'frontend.log', 'w')
-
-	backend = subprocess.Popen(['uvicorn', 'backend.api:app', '--reload'], stdout=backend_log, stderr=subprocess.STDOUT)
-	typer.echo(typer.style('Starting frontend...', bold=True))
-	frontend = subprocess.Popen(['npm', 'run', 'dev'], cwd='../ui', stdout=frontend_log, stderr=subprocess.STDOUT)
-	typer.echo(typer.style('Opening browser...', bold=True))
-	webbrowser.open('http://localhost:5173')
-	try:
-		typer.echo(typer.style('Press Ctrl+C to stop the GUI and servers.', fg=typer.colors.YELLOW, bold=True))
-		backend.wait()
-		frontend.wait()
-	except KeyboardInterrupt:
-		typer.echo(typer.style('\nShutting down servers...', fg=typer.colors.RED, bold=True))
-		backend.terminate()
-		frontend.terminate()
 
 
 if __name__ == '__main__':

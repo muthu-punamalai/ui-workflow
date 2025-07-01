@@ -165,7 +165,8 @@ class HybridTestRunner:
         self,
         llm: BaseChatModel,
         page_extraction_llm: Optional[BaseChatModel] = None,
-        browser: Optional[Browser] = None
+        browser: Optional[Browser] = None,
+        max_steps: Optional[int] = None
     ):
         self.llm = llm
         self.page_extraction_llm = page_extraction_llm or llm
@@ -173,6 +174,10 @@ class HybridTestRunner:
         self.workflow_capture = SimpleWorkflowCapture()
         self.fallback_manager = FallbackManager(llm, page_extraction_llm, self.browser)
         self.assertion_evaluator = AssertionEvaluator()
+
+        # Configure max_steps with environment variable fallback
+        import os
+        self.max_steps = max_steps or int(os.getenv('BROWSER_USE_MAX_STEPS', '100'))
 
         # Initialize token tracking
         self.token_tracker = get_token_tracker()
@@ -589,7 +594,8 @@ class HybridTestRunner:
             )
 
             # Execute browser-use (token tracking happens automatically via wrapped LLM)
-            agent_history = await browser_agent.run(max_steps=50)
+            # Use configurable max_steps (default 100, was previously hardcoded to 50)
+            agent_history = await browser_agent.run(max_steps=self.max_steps)
 
             # Try to extract real token usage from browser agent and history
             self._extract_tokens_from_browser_agent_and_history(browser_agent, agent_history)
@@ -1020,7 +1026,13 @@ class HybridTestRunner:
                     extracted_content.append(content)
 
                     # Check for error indicators in content
-                    if any(error_word in content.lower() for error_word in ['error', 'failed', 'timeout', 'not found']):
+                    error_patterns = [
+                        'error', 'failed', 'timeout', 'not found',
+                        'blocker encountered', 'unable to proceed', 'cannot complete',
+                        'task completed without success', 'email conflict', 'already has an ongoing contract',
+                        'authentication error', 'critical failure', 'execution stopped'
+                    ]
+                    if any(error_pattern in content.lower() for error_pattern in error_patterns):
                         errors.append(content)
 
                 # Check for explicit error attribute
@@ -1031,12 +1043,32 @@ class HybridTestRunner:
                 if hasattr(result, 'success') and result.success is False:
                     errors.append(f"Action failed: {getattr(result, 'extracted_content', 'Unknown error')}")
 
+            # Check for final task completion status
+            final_status_indicators = []
+            if extracted_content:
+                # Check the last few content items for completion status
+                last_content_items = extracted_content[-3:] if len(extracted_content) >= 3 else extracted_content
+                for content in last_content_items:
+                    content_lower = content.lower()
+                    if 'task completed without success' in content_lower:
+                        errors.append("Final task status: Task completed without success")
+                        final_status_indicators.append('FAILED')
+                    elif 'blocker encountered' in content_lower:
+                        errors.append("Final task status: Blocker encountered")
+                        final_status_indicators.append('FAILED')
+                    elif 'unable to proceed' in content_lower:
+                        errors.append("Final task status: Unable to proceed")
+                        final_status_indicators.append('FAILED')
+
             logger.debug(f"Converted agent history: {len(extracted_content)} content items, {len(model_actions)} actions, {len(errors)} errors")
+            if final_status_indicators:
+                logger.info(f"Final status indicators found: {final_status_indicators}")
 
             return {
                 'extracted_content': extracted_content,
                 'model_actions': model_actions,
-                'errors': errors
+                'errors': errors,
+                'final_status_indicators': final_status_indicators
             }
 
         except Exception as e:

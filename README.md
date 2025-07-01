@@ -147,7 +147,7 @@ Scenario: Edit pay supplement under processing
       "type": "input",
       "cssSelector": "input[id=\"email\"][name=\"email\"][data-cy=\"email\"]",
       "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[1]/div/input",
-      "value": "tester+bullertest@usemultiplier.com",
+      "value": "htester+bullertest@usemultiplier.com",
       "elementTag": "input",
       "timestamp": 0,
       "tabId": 0

@@ -1,0 +1,1455 @@
+{
+  "workflow_analysis": "Captured from browser-use execution on 2025-07-01T17:29:52.609789",
+  "name": "pay_supplements",
+  "description": "Auto-generated workflow from pay_supplements",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Navigate to https://release-app.usemultiplier.com",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "navigation",
+      "url": "https://release-app.usemultiplier.com"
+    },
+    {
+      "description": "Enter 'tester+bullertest@usemultiplier.com' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "[data-cy='email']",
+      "value": "tester+bullertest@usemultiplier.com",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[1]/div/input",
+      "elementTag": "input",
+      "primarySelector": "[data-cy='email']",
+      "semanticSelector": "input[name='email']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "email",
+        "placeholder": "someone@example.com",
+        "data-cy": "email",
+        "name": "email",
+        "class": "css-dkx3e",
+        "value": ""
+      }
+    },
+    {
+      "description": "Enter 'Password@123' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "[data-testid='password-input']",
+      "value": "Password@123",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[2]/div[2]/input",
+      "elementTag": "input",
+      "primarySelector": "[data-testid='password-input']",
+      "semanticSelector": "input[name='password']",
+      "fallbackSelectors": [
+        "input[type='password'][placeholder='password']",
+        "input[type='password']"
+      ],
+      "elementAttributes": {
+        "data-testid": "password-input",
+        "type": "password",
+        "placeholder": "password",
+        "data-cy": "password",
+        "name": "password",
+        "class": "css-u8o3yb"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-cy='submit']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[3]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-cy='submit']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "submit",
+        "data-fs-unmask": "true",
+        "data-sentry-unmask": "true",
+        "data-cy": "submit",
+        "class": "css-oqiu1m"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='ADMINISTRATION-section']",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[2]/div[5]/div",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": "[data-testid='ADMINISTRATION-section']",
+      "semanticSelector": "[role='button']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "role": "button",
+        "tabindex": "0",
+        "data-testid": "ADMINISTRATION-section",
+        "aria-hidden": "true"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='pay-supplements-link']",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[2]/div[5]/div[2]/a[5]",
+      "elementTag": "a",
+      "elementText": null,
+      "primarySelector": "[data-testid='pay-supplements-link']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "pay-supplements-link",
+        "class": "",
+        "href": "/company/pay-supplements"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(1) > div:nth-of-type(2) > a > button.css-1kkwtae[type=\"button\"]",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[1]/div[2]/a/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "button",
+        "data-fs-unmask": "true",
+        "data-sentry-unmask": "true",
+        "class": "css-1kkwtae"
+      }
+    },
+    {
+      "description": "Enter 'Ava Pope' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "input[type='text'][placeholder='Select employee']",
+      "value": "Ava Pope",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/form/div[1]/div/div/input",
+      "elementTag": "input",
+      "primarySelector": null,
+      "semanticSelector": "input[type='text']",
+      "fallbackSelectors": [
+        "input[type='text'][placeholder='Select employee']",
+        "input[type='text']"
+      ],
+      "elementAttributes": {
+        "type": "text",
+        "placeholder": "Select employee",
+        "class": "css-eg9s4k"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='member-1173303']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/form/div[1]/div/div[2]/table/tbody/tr",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='member-1173303']",
+      "semanticSelector": "[role='row']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "role": "row",
+        "data-testid": "member-1173303",
+        "class": "css-1cwtqtw"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='select-employee']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/form/div[2]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='select-employee']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "submit",
+        "data-fs-unmask": "true",
+        "data-sentry-unmask": "true",
+        "data-testid": "select-employee",
+        "class": "css-o6haz4"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > div > form > div:nth-of-type(2) > label.css-1i3kqz5[for=\"type\"]",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[2]/label",
+      "elementTag": "label",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "for": "type",
+        "class": "css-1i3kqz5"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-entry-Bonus [1]']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[2]/div/div/div/div/table/tbody/tr[3]",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-entry-Bonus [1]']",
+      "semanticSelector": "[role='button']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "dropdown-entry-Bonus [1]",
+        "role": "button",
+        "tabindex": "0",
+        "class": "css-1b0pki5"
+      }
+    },
+    {
+      "description": "Enter '1234' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "[data-testid='currency-input']",
+      "value": "1234",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[1]/div/div[2]/input",
+      "elementTag": "input",
+      "primarySelector": "[data-testid='currency-input']",
+      "semanticSelector": "input[name='amount']",
+      "fallbackSelectors": [
+        "input[type='number'][placeholder='0']",
+        "input[type='number']"
+      ],
+      "elementAttributes": {
+        "step": ".01",
+        "type": "number",
+        "placeholder": "0",
+        "data-testid": "currency-input",
+        "id": "amount",
+        "name": "amount",
+        "class": "css-1k4q2h4"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-button']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[2]/div[1]/div/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-button']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "billingFrequency",
+        "data-testid": "dropdown-button",
+        "type": "button",
+        "class": "css-1idf0xt"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-entry-MONTHLY']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[2]/div[1]/div/div/div/table/tbody/tr[4]",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-entry-MONTHLY']",
+      "semanticSelector": "[role='button']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "dropdown-entry-MONTHLY",
+        "role": "button",
+        "tabindex": "0",
+        "class": "css-1b0pki5"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='date-input-field']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[5]/div[1]/div/div/input",
+      "elementTag": "input",
+      "elementText": null,
+      "primarySelector": "[data-testid='date-input-field']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "startDate",
+        "data-testid": "date-input-field",
+        "placeholder": "Select date",
+        "autocomplete": "off",
+        "class": "css-kyxww6",
+        "value": ""
+      }
+    },
+    {
+      "description": "Enter '2025-07-01' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "[data-testid='date-input-field']",
+      "value": "2025-07-01",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[5]/div[1]/div/div/input",
+      "elementTag": "input",
+      "primarySelector": "[data-testid='date-input-field']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "startDate",
+        "data-testid": "date-input-field",
+        "placeholder": "Select date",
+        "autocomplete": "off",
+        "class": "css-kyxww6",
+        "value": ""
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='date-1']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[5]/div[1]/div/div/div/div/div/div/div[10]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='date-1']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "date-1",
+        "type": "button",
+        "class": "css-yl6vsb"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "",
+      "xpath": null,
+      "elementTag": null,
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": null,
+      "elementAttributes": null
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1)",
+      "xpath": "html/body/div[1]",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {}
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "",
+      "xpath": null,
+      "elementTag": null,
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": null,
+      "elementAttributes": null
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1)",
+      "xpath": "html/body/div[1]",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {}
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='notes-input']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[7]/textarea",
+      "elementTag": "textarea",
+      "elementText": null,
+      "primarySelector": "[data-testid='notes-input']",
+      "semanticSelector": "textarea[name='notes']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "notes",
+        "data-testid": "notes-input",
+        "rows": "4",
+        "placeholder": "Add disclaimers if you have any",
+        "name": "notes",
+        "class": "css-7pu03d"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1)",
+      "xpath": "html/body/div[1]",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {}
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-button']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[2]/div/div/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-button']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "type",
+        "data-testid": "dropdown-button",
+        "type": "button",
+        "class": "css-1idf0xt"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-entry-Bonus [1]']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[2]/div/div/div/div/table/tbody/tr[3]",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-entry-Bonus [1]']",
+      "semanticSelector": "[role='button']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "dropdown-entry-Bonus [1]",
+        "role": "button",
+        "tabindex": "0",
+        "class": "css-ryiir0"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1)",
+      "xpath": "html/body/div[1]",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {}
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3) > div > div:nth-of-type(1) > button.css-121q942[type=\"button\"]",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[3]/div/div[1]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "button",
+        "class": "css-121q942"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(5) > div > div",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[2]/div[5]/div/div",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {}
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='pay-supplements-link']",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[2]/div[5]/div[2]/a[5]",
+      "elementTag": "a",
+      "elementText": null,
+      "primarySelector": "[data-testid='pay-supplements-link']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "pay-supplements-link",
+        "class": "",
+        "href": "/company/pay-supplements"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(1) > div:nth-of-type(2) > a > button.css-1kkwtae[type=\"button\"]",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[1]/div[2]/a/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "button",
+        "data-fs-unmask": "true",
+        "data-sentry-unmask": "true",
+        "class": "css-1kkwtae"
+      }
+    },
+    {
+      "description": "Enter 'Ava Pope' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "input[type='text'][placeholder='Select employee']",
+      "value": "Ava Pope",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/form/div[1]/div/div/input",
+      "elementTag": "input",
+      "primarySelector": null,
+      "semanticSelector": "input[type='text']",
+      "fallbackSelectors": [
+        "input[type='text'][placeholder='Select employee']",
+        "input[type='text']"
+      ],
+      "elementAttributes": {
+        "type": "text",
+        "placeholder": "Select employee",
+        "class": "css-eg9s4k"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='member-1173303']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/form/div[1]/div/div[2]/table/tbody/tr",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='member-1173303']",
+      "semanticSelector": "[role='row']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "role": "row",
+        "data-testid": "member-1173303",
+        "class": "css-1cwtqtw"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='select-employee']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/form/div[2]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='select-employee']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "submit",
+        "data-fs-unmask": "true",
+        "data-sentry-unmask": "true",
+        "data-testid": "select-employee",
+        "class": "css-o6haz4"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > div > form > div:nth-of-type(2) > label.css-1i3kqz5[for=\"type\"]",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[2]/label",
+      "elementTag": "label",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "for": "type",
+        "class": "css-1i3kqz5"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-entry-Bonus [1]']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[2]/div/div/div/div/table/tbody/tr[3]",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-entry-Bonus [1]']",
+      "semanticSelector": "[role='button']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "dropdown-entry-Bonus [1]",
+        "role": "button",
+        "tabindex": "0",
+        "class": "css-1b0pki5"
+      }
+    },
+    {
+      "description": "Enter '1234' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "[data-testid='currency-input']",
+      "value": "1234",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[1]/div/div[2]/input",
+      "elementTag": "input",
+      "primarySelector": "[data-testid='currency-input']",
+      "semanticSelector": "input[name='amount']",
+      "fallbackSelectors": [
+        "input[type='number'][placeholder='0']",
+        "input[type='number']"
+      ],
+      "elementAttributes": {
+        "step": ".01",
+        "type": "number",
+        "placeholder": "0",
+        "data-testid": "currency-input",
+        "id": "amount",
+        "name": "amount",
+        "class": "css-1k4q2h4"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-button']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[2]/div[1]/div/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-button']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "billingFrequency",
+        "data-testid": "dropdown-button",
+        "type": "button",
+        "class": "css-1idf0xt"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-entry-MONTHLY']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[2]/div[1]/div/div/div/table/tbody/tr[4]",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-entry-MONTHLY']",
+      "semanticSelector": "[role='button']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "dropdown-entry-MONTHLY",
+        "role": "button",
+        "tabindex": "0",
+        "class": "css-1b0pki5"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > div > form > div:nth-of-type(5) > div:nth-of-type(1) > label.css-1i3kqz5[for=\"startDate\"]",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[5]/div[1]/label",
+      "elementTag": "label",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "for": "startDate",
+        "class": "css-1i3kqz5"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='date-1']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[5]/div[1]/div/div/div/div/div/div/div[10]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='date-1']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "date-1",
+        "type": "button",
+        "class": "css-yl6vsb"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-button']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[2]/div[1]/div/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-button']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "billingFrequency",
+        "data-testid": "dropdown-button",
+        "type": "button",
+        "class": "css-1idf0xt"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-entry-MONTHLY']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[2]/div[1]/div/div/div/table/tbody/tr[4]",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-entry-MONTHLY']",
+      "semanticSelector": "[role='button']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "dropdown-entry-MONTHLY",
+        "role": "button",
+        "tabindex": "0",
+        "class": "css-1b0pki5"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1)",
+      "xpath": "html/body/div[1]",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {}
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1)",
+      "xpath": "html/body/div[1]",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {}
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3) > div > div:nth-of-type(1) > button.css-121q942[type=\"button\"]",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[3]/div/div[1]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "button",
+        "class": "css-121q942"
+      }
+    },
+    {
+      "description": "Enter 'tester+bullertest@usemultiplier.com' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "[data-cy='email']",
+      "value": "tester+bullertest@usemultiplier.com",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[1]/div/input",
+      "elementTag": "input",
+      "primarySelector": "[data-cy='email']",
+      "semanticSelector": "input[name='email']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "email",
+        "placeholder": "someone@example.com",
+        "data-cy": "email",
+        "name": "email",
+        "class": "css-dkx3e",
+        "value": ""
+      }
+    },
+    {
+      "description": "Enter 'Password@123' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "[data-testid='password-input']",
+      "value": "Password@123",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[2]/div[2]/input",
+      "elementTag": "input",
+      "primarySelector": "[data-testid='password-input']",
+      "semanticSelector": "input[name='password']",
+      "fallbackSelectors": [
+        "input[type='password'][placeholder='password']",
+        "input[type='password']"
+      ],
+      "elementAttributes": {
+        "data-testid": "password-input",
+        "type": "password",
+        "placeholder": "password",
+        "data-cy": "password",
+        "name": "password",
+        "class": "css-u8o3yb"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-cy='submit']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[3]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-cy='submit']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "submit",
+        "data-fs-unmask": "true",
+        "data-sentry-unmask": "true",
+        "data-cy": "submit",
+        "class": "css-oqiu1m"
+      }
+    },
+    {
+      "description": "Enter 'tester+bullertest@usemultiplier.com' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "[data-cy='email']",
+      "value": "tester+bullertest@usemultiplier.com",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[1]/div/input",
+      "elementTag": "input",
+      "primarySelector": "[data-cy='email']",
+      "semanticSelector": "input[name='email']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "email",
+        "placeholder": "someone@example.com",
+        "data-cy": "email",
+        "name": "email",
+        "class": "css-1g8zyk9",
+        "value": "tester+bullertest@usemultiplier.com"
+      }
+    },
+    {
+      "description": "Enter 'Password@123' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "[data-testid='password-input']",
+      "value": "Password@123",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[2]/div[2]/input",
+      "elementTag": "input",
+      "primarySelector": "[data-testid='password-input']",
+      "semanticSelector": "input[name='password']",
+      "fallbackSelectors": [
+        "input[type='password'][placeholder='password']",
+        "input[type='password']"
+      ],
+      "elementAttributes": {
+        "data-testid": "password-input",
+        "type": "password",
+        "placeholder": "password",
+        "data-cy": "password",
+        "name": "password",
+        "class": "css-u8o3yb"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='visibility-toggle']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[2]/div[2]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='visibility-toggle']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "visibility-toggle",
+        "type": "button",
+        "tabindex": "-1",
+        "class": "css-1ilkk59"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-cy='submit']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[3]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-cy='submit']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "submit",
+        "data-fs-unmask": "true",
+        "data-sentry-unmask": "true",
+        "data-cy": "submit",
+        "class": "css-oqiu1m"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='visibility-toggle']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div/div/form/div[2]/div[2]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='visibility-toggle']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "visibility-toggle",
+        "type": "button",
+        "tabindex": "-1",
+        "class": "css-1ilkk59"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(5) > div > div",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[2]/div[5]/div/div",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {}
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='pay-supplements-link']",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[2]/div[5]/div[2]/a[5]",
+      "elementTag": "a",
+      "elementText": null,
+      "primarySelector": "[data-testid='pay-supplements-link']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "pay-supplements-link",
+        "class": "",
+        "href": "/company/pay-supplements"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(1) > div:nth-of-type(2) > a > button.css-1kkwtae[type=\"button\"]",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[1]/div[2]/a/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "button",
+        "data-fs-unmask": "true",
+        "data-sentry-unmask": "true",
+        "class": "css-1kkwtae"
+      }
+    },
+    {
+      "description": "Enter 'Ava Pope' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "input[type='text'][placeholder='Select employee']",
+      "value": "Ava Pope",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/form/div[1]/div/div/input",
+      "elementTag": "input",
+      "primarySelector": null,
+      "semanticSelector": "input[type='text']",
+      "fallbackSelectors": [
+        "input[type='text'][placeholder='Select employee']",
+        "input[type='text']"
+      ],
+      "elementAttributes": {
+        "type": "text",
+        "placeholder": "Select employee",
+        "class": "css-eg9s4k"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='member-1173303']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/form/div[1]/div/div[2]/table/tbody/tr",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='member-1173303']",
+      "semanticSelector": "[role='row']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "role": "row",
+        "data-testid": "member-1173303",
+        "class": "css-1cwtqtw"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='select-employee']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/form/div[2]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='select-employee']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "submit",
+        "data-fs-unmask": "true",
+        "data-sentry-unmask": "true",
+        "data-testid": "select-employee",
+        "class": "css-o6haz4"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div > div > form > div:nth-of-type(2) > label.css-1i3kqz5[for=\"type\"]",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[2]/label",
+      "elementTag": "label",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "for": "type",
+        "class": "css-1i3kqz5"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-entry-Bonus [1]']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[2]/div/div/div/div/table/tbody/tr[3]",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-entry-Bonus [1]']",
+      "semanticSelector": "[role='button']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "dropdown-entry-Bonus [1]",
+        "role": "button",
+        "tabindex": "0",
+        "class": "css-1b0pki5"
+      }
+    },
+    {
+      "description": "Enter '1234' in input field",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "input",
+      "cssSelector": "[data-testid='currency-input']",
+      "value": "1234",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[1]/div/div[2]/input",
+      "elementTag": "input",
+      "primarySelector": "[data-testid='currency-input']",
+      "semanticSelector": "input[name='amount']",
+      "fallbackSelectors": [
+        "input[type='number'][placeholder='0']",
+        "input[type='number']"
+      ],
+      "elementAttributes": {
+        "step": ".01",
+        "type": "number",
+        "placeholder": "0",
+        "data-testid": "currency-input",
+        "id": "amount",
+        "name": "amount",
+        "class": "css-1k4q2h4"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-button']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[2]/div[1]/div/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-button']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "billingFrequency",
+        "data-testid": "dropdown-button",
+        "type": "button",
+        "class": "css-1idf0xt"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='dropdown-entry-MONTHLY']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[3]/div[2]/div[1]/div/div/div/table/tbody/tr[4]",
+      "elementTag": "tr",
+      "elementText": null,
+      "primarySelector": "[data-testid='dropdown-entry-MONTHLY']",
+      "semanticSelector": "[role='button']",
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "dropdown-entry-MONTHLY",
+        "role": "button",
+        "tabindex": "0",
+        "class": "css-1b0pki5"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='recurring-no']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[4]/div/label[2]/input",
+      "elementTag": "input",
+      "elementText": null,
+      "primarySelector": "[data-testid='recurring-no']",
+      "semanticSelector": "input[name='recurring']",
+      "fallbackSelectors": [
+        "input[type='radio']"
+      ],
+      "elementAttributes": {
+        "type": "radio",
+        "id": "recurring-no",
+        "name": "recurring",
+        "data-testid": "recurring-no",
+        "class": "css-1xnnzc2",
+        "checked": ""
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='date-input-field']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[5]/div[1]/div/div/input",
+      "elementTag": "input",
+      "elementText": null,
+      "primarySelector": "[data-testid='date-input-field']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "id": "startDate",
+        "data-testid": "date-input-field",
+        "placeholder": "Select date",
+        "autocomplete": "off",
+        "class": "css-kyxww6",
+        "value": ""
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='date-1']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[5]/div[1]/div/div/div/div/div/div/div[10]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='date-1']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "date-1",
+        "type": "button",
+        "class": "css-yl6vsb"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='calendar-widget-button']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div/form/div[5]/div[2]/div/div/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='calendar-widget-button']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "calendar-widget-button",
+        "type": "button",
+        "tabindex": "-1",
+        "class": "css-1m0le1w"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1)",
+      "xpath": "html/body/div[1]",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {}
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3) > div > div:nth-of-type(1) > button.css-121q942[type=\"button\"]",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[3]/div/div[1]/button",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "type": "button",
+        "class": "css-121q942"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "html > body > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(5) > div > div",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[2]/div[5]/div/div",
+      "elementTag": "div",
+      "elementText": null,
+      "primarySelector": null,
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {}
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='pay-supplements-link']",
+      "xpath": "html/body/div[1]/div[2]/div[1]/div[2]/div[5]/div[2]/a[5]",
+      "elementTag": "a",
+      "elementText": null,
+      "primarySelector": "[data-testid='pay-supplements-link']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "pay-supplements-link",
+        "class": "",
+        "href": "/company/pay-supplements"
+      }
+    },
+    {
+      "description": "Click element",
+      "output": null,
+      "timestamp": 0,
+      "tabId": 0,
+      "type": "click",
+      "cssSelector": "[data-testid='tab-draft']",
+      "xpath": "html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div[1]/div/button[1]",
+      "elementTag": "button",
+      "elementText": null,
+      "primarySelector": "[data-testid='tab-draft']",
+      "semanticSelector": null,
+      "fallbackSelectors": [],
+      "elementAttributes": {
+        "data-testid": "tab-draft",
+        "type": "button",
+        "class": "css-1i05epz"
+      }
+    }
+  ],
+  "input_schema": []
+}
